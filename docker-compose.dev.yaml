@@ -1,6 +1,6 @@
 services:
   client:
-    container_name: code_challenge_dev_client
+    container_name: habit_tracker_dev_client
     build: ./client
     image: debug_client
     ports: 
@@ -12,14 +12,14 @@ services:
         target: /code
     command: [ "http-server" ]
   api:
-    container_name: code_challenge_dev_api
+    container_name: habit_tracker_dev_api
     ports: 
       - 3000:3000
     environment: 
-      - PGUSER=futureproof
+      - PGUSER=getbaked
       - PGHOST=db
-      - PGPASSWORD=librarypass
-      - PGDATABASE=library
+      - PGPASSWORD=habitspass
+      - PGDATABASE=habits
       - PGPORT=5432
       - NODE_ENV=development
     depends_on:
@@ -31,11 +31,11 @@ services:
     volumes:
       - "dbdata:/var/lib/postgresql/data"
     environment: 
-      - POSTGRES_DB=library
-      - POSTGRES_USER=futureproof
-      - POSTGRES_PASSWORD=librarypass
+      - POSTGRES_DB=habits
+      - POSTGRES_USER=getbaked
+      - POSTGRES_PASSWORD=habitspass
 volumes:
   dbdata:
 networks: 
   default:
-    name: code_challenge_api
+    name: habit_tracker_api

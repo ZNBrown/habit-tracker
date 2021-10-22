@@ -5,14 +5,12 @@ services:
     working_dir: /code
     volumes:
       - type: bind
-        source: ./api
+        source: ./server
         target: /code
 
   db:
     image: postgres:12.4
     environment: 
-      - POSTGRES_USER=futureproof
+      - POSTGRES_USER=getbaked
     volumes:
       - "./db:/docker-entrypoint-initdb.d/:ro"
-
-      # might have a problem with volumes line
