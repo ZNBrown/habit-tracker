@@ -18,3 +18,14 @@ closeHabit.addEventListener('click', closeHabitForm);
 function closeHabitForm() {
   closeModal.classList.add('hidden')
 }
+
+
+
+//log out button
+const logOutBtn = document.getElementById('logout');
+
+logOutBtn.addEventListener('click', () => {
+    localStorage.clear();
+    //window.location.assign("<deploy homepage URL>")
+})
+
