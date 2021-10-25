@@ -5,42 +5,43 @@ require('dotenv').config();
 
 const User = require('../model/UserModel')
 
-async function create (req, res){
+async function create(req, res) {
     try {
         const salt = await bcrypt.genSalt();
         const hashedPass = await bcrypt.hash(req.body.password, salt)
-        await User.create({...req.body, password: hashedPass})
-        res.status(201).json({msg: 'User created'})
+        await User.create({ ...req.body, password: hashedPass })
+        res.status(201).json({ msg: 'User created' })
     } catch (err) {
         res.status(500).json(err)
     }
 }
-async function login (req, res){
+async function login(req, res) {
     try {
         const user = await User.findByEmail(req.body.email)
-        if(!user){
+        if (!user) {
             throw new Error('No user with this email')
         }
         const authed = bcrypt.compare(req.body.password, user.password)
-        if(!!authed){
+        if (!!authed) {
             const payload = { username: user.username, email: user.email }
             const sendToken = (err, token) => {
-                if(err){ throw new Error('Error in token generation') }
+                if (err) { throw new Error('Error in token generation') }
                 res.status(200).json({
                     success: true,
                     token: "Bearer " + token,
                 });
             }
             jwt.sign(payload, process.env.SECRET, { expiresIn: 600 }, sendToken);
+            sessionStorage.setItem('email', user.email)
         } else {
             throw new Error('User failed to authenticate')
         }
     } catch (err) {
         console.log(err)
-        res.status(401).json({err})
+        res.status(401).json({ err })
     }
 }
 
 
 
-module.exports = {create, login}
+module.exports = { create, login }
