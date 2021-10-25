@@ -9,7 +9,6 @@ function showAddHabitForm() {
 	habitModal.classList.remove('hidden');
 }
 
-
 //close button in form closes form
 const closeHabit = document.getElementById('closeHabit');
 const closeModal = document.querySelector('.habit-modal');
