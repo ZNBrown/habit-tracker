@@ -18,9 +18,20 @@ body{
       }
   }
 
+#logo {
+    width: 50px;
+    height: 50px;
+    margin-top:10px;
+    
+}
+
 h1 {
     color: white;
-    
+}
+
+#welcomeUser {
+    color: black;
+    font-size: 15px;
 }
 
 header {
@@ -37,10 +48,21 @@ header {
 }
 
 #logout {
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
+    width: 80px;
+    height: 40px;
     align-content: center;
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    box-shadow: 1px 1px 4px white;
+}
+
+#logout:hover {
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
 }
 
 .profilearea {
@@ -55,9 +77,9 @@ header {
     display: flex;
     background-color: white;
     width: 65%;
-    height: 50px;
-    border: 2px solid black;
+    height: 60px;
     border-radius: 10px;
+    box-shadow: 1px 1px 4px white;
 }
 
 #profile p {
@@ -66,7 +88,18 @@ header {
 
 #addhabit {
     margin: 10px 10px 10px auto;
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
+    font-size: 17px;
+}
 
+#addhabit:hover {
+    background: white;
+    color: black;
+    box-shadow: 1px 1px 4px black;
 }
 
 .habits {
@@ -83,8 +116,8 @@ header {
     background-color: white;
     width: 65%;
     height: 150px;
-    border: 2px solid black;
     border-radius: 10px;
+    box-shadow: 1px 1px 4px white;
 }
 
 #one {

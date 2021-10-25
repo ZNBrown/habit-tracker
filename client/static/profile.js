@@ -1,8 +1,10 @@
 //Dyname Welcome <user>
 function welcomeUser() {
 	const welcomeMessage = document.getElementById('welcomeUser');
-	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`;
+	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
 }
+
+
 
 //add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
@@ -32,6 +34,6 @@ const logOutBtn = document.getElementById('logout');
 logOutBtn.addEventListener('click', () => {
     localStorage.clear();
     window.location.pathname = '/';
-    //window.location.assign("<deploy homepage URL>")
+    //window.location.assign("<deploy homepage URL>") //MAIN CODE WHEN DB CONNECTS
 })
 
