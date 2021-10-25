@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 body{
     height: 100vh;
     width: 100vw;
     background: linear-gradient(-45deg, #1f0101, #16060e, #01141b, #011f18);
     background-size: 300% 300%;
     animation: gradient 11s ease infinite;
+    font-family: 'Poppins', sans-serif;
   }
   
   @keyframes gradient {
@@ -58,6 +60,7 @@ header {
     color: black;
     font-size: 17px;
     box-shadow: 1px 1px 4px white;
+    font-family: 'Poppins', sans-serif;
 }
 
 #logout:hover {
@@ -94,12 +97,14 @@ header {
     background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
     color: white;
     font-size: 17px;
+    font-family: 'Poppins', sans-serif;
 }
 
 #addhabit:hover {
     background: white;
     color: black;
     box-shadow: 1px 1px 4px black;
+    font-family: 'Poppins', sans-serif;
 }
 
 .habits {
