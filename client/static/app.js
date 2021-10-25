@@ -18,7 +18,3 @@ signupLink.onclick = (()=>{
 });
 
 
-//add habit button opens pop-up form
-
-
-//close button in form closes form
