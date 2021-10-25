@@ -1,0 +1,51 @@
+.habit-modal {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.popup-modal {
+    background-color: rgb(167, 167, 167);
+    margin: auto;
+    padding: 10px 5px;
+    border: 2px solid black;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    place-items: center;
+    border-radius: 10px;
+}
+
+.popup-modal label {
+    font-size: 20px;
+    margin: 5px;
+}
+
+
+
+
+.popup-modal h1 {
+    font-size: 40px;
+    color:darkblue;
+    text-align: center;
+}
+
+.fa-times {
+    color: rgb(50, 50, 187);
+    font-size: 30px;
+    float: right;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
