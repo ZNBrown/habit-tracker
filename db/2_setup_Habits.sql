@@ -9,3 +9,4 @@ CREATE TABLE Habits (
     complete BOOLEAN NOT NULL,
     user_id INT
 );
+
