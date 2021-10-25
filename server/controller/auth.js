@@ -1,4 +1,7 @@
 const bcrypt = require('bcryptjs')
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+
 
 const User = require('../model/UserModel')
 
@@ -20,13 +23,24 @@ async function login (req, res){
         }
         const authed = bcrypt.compare(req.body.password, user.password)
         if(!!authed){
-            res.status(200).json({user: user.username})
+            const payload = { username: user.username, email: user.email }
+            const sendToken = (err, token) => {
+                if(err){ throw new Error('Error in token generation') }
+                res.status(200).json({
+                    success: true,
+                    token: "Bearer " + token,
+                });
+            }
+            jwt.sign(payload, process.env.SECRET, { expiresIn: 600 }, sendToken);
         } else {
             throw new Error('User failed to authenticate')
         }
     } catch (err) {
+        console.log(err)
         res.status(401).json({err})
     }
 }
+
+
 
 module.exports = {create, login}
