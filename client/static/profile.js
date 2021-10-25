@@ -26,6 +26,7 @@ const logOutBtn = document.getElementById('logout');
 
 logOutBtn.addEventListener('click', () => {
     localStorage.clear();
+    window.location.pathname = '/';
     //window.location.assign("<deploy homepage URL>")
 })
 
