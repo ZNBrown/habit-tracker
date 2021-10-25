@@ -40,7 +40,7 @@ class Habit {
     }
 
     static getHabitByUserId(userId) {
-        return new Promise(async, (res, rej) => {
+        return new Promise(async (res, rej) => {
             try {
                 let habitData = await db.query(`SELECT * FROM Habits WHERE user_id = $1;`, [userId])
                 let habits = new Habit(habitData.rows[0])
@@ -52,12 +52,11 @@ class Habit {
     }
 
     static create(habitData) {
-        return new Promise(async, (res, rej) => {
+        return new Promise(async (res, rej) => {
             try {
                 let frequency_track = 0;
                 let complete = false;
-                const { habit_name, habit_info, frequency, frequency_target } = habitData
-                const userEmail = sessionStorage.getItem('email')
+                const { habit_name, habit_info, frequency, frequency_target, userEmail } = habitData
                 let user = await User.findByEmail(userEmail)
                 const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
                 const newHabit = new Habit(habits.rows[0]);

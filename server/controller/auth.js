@@ -31,8 +31,8 @@ async function login(req, res) {
                     token: "Bearer " + token,
                 });
             }
-            jwt.sign(payload, process.env.SECRET, { expiresIn: 600 }, sendToken);
-            sessionStorage.setItem('email', user.email)
+            jwt.sign(payload, process.env.SECRET, { expiresIn: 6000000 }, sendToken);
+
         } else {
             throw new Error('User failed to authenticate')
         }
