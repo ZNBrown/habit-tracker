@@ -51,12 +51,12 @@ class Habit {
         })
     }
 
-    static create(habitData) {
+    static create(habitData, userEmail) {
         return new Promise(async (res, rej) => {
             try {
                 let frequency_track = 0;
                 let complete = false;
-                const { habit_name, habit_info, frequency, frequency_target, userEmail } = habitData
+                const { habit_name, habit_info, frequency, frequency_target} = habitData
                 let user = await User.findByEmail(userEmail)
                 const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
                 const newHabit = new Habit(habits.rows[0]);
