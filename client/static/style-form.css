@@ -19,6 +19,7 @@
     text-align: center;
     place-items: center;
     border-radius: 10px;
+    box-shadow: 0px 10px 20px rgba(53, 53, 53, 0.616);
 }
 
 .popup-modal label {
