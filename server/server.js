@@ -4,11 +4,10 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 server.use(express.json());
+const allRoutes = require('./routes/route')
 
-// const booksRoutes = require('./routes/books')
-// const authorsRoutes = require('./routes/authors')
-// server.use('/books', booksRoutes)
-// server.use('/authors', authorsRoutes)
+server.use('/main',allRoutes)
+
 
 server.get('/', (req, res) => res.send('Welcome to the library'))
 
