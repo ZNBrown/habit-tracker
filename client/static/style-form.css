@@ -9,6 +9,10 @@
     height: 100%;
 }
 
+.hidden {
+	display: none;
+}
+
 .popup-modal {
     background-color: rgb(167, 167, 167);
     margin: auto;
