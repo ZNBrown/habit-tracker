@@ -1,3 +1,4 @@
+//switching between log in and register in the homepage
 const loginText = document.querySelector(".title-text .login");
 const loginForm = document.querySelector("form.login");
 const loginBtn = document.querySelector("label.login");
@@ -15,3 +16,9 @@ signupLink.onclick = (()=>{
   signupBtn.click();
   return false;
 });
+
+
+//add habit button opens pop-up form
+
+
+//close button in form closes form

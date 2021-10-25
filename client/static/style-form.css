@@ -35,6 +35,16 @@
     margin: 10px 5px;
 }
 
+#submitHabit {
+    width: 30%;
+    margin: auto;
+    cursor: pointer;
+}
+
+#submitHabit:hover {
+    background-color: darkblue;
+    color: white;
+}
 
 
 .popup-modal h1 {
