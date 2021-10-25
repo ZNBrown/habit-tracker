@@ -1,0 +1,129 @@
+body{
+    margin: 0;
+    background-color: black;
+    
+}
+
+h1 {
+    color: white;
+    
+}
+
+header {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    justify-items: center;
+}
+
+#logoutarea {
+    display: flex;
+    align-items: center;
+    
+       
+}
+
+#logout {
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    align-content: center;
+}
+
+.profilearea {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#profile { 
+    display: flex;
+    background-color: white;
+    width: 500px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#profile p {
+    padding-left: 10px;
+}
+
+#addhabit {
+    margin: 10px 10px 10px auto;
+
+}
+
+.habits {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+#habitdet { 
+    display: grid;
+    grid-template-rows: 40% 60%;
+    grid-template-columns: 100%;
+    justify-content: center;
+    background-color: white;
+    width: 500px;
+    height: 100px;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#exetitle {
+    display: flex;
+}
+
+#exercise {   
+    justify-content: center;
+    margin: auto;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+}
+
+#frequency {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+}
+
+#pie {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+}
+
+#tick {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;    
+}
+
+#delete {
+    margin: 5px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100px;
+    height: 25px;
+}
+
+#habitdetlow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: auto;
+    grid-gap: 15px    
+}
