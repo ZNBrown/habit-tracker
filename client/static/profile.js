@@ -1,5 +1,10 @@
-//add habit button opens pop-up form
+//Dyname Welcome <user>
+function welcomeUser() {
+	const welcomeMessage = document.getElementById('welcomeUser');
+	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`;
+}
 
+//add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
 
 addHabit.addEventListener('click', showAddHabitForm);
