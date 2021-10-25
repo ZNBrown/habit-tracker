@@ -36,6 +36,7 @@ async function login (req, res){
             throw new Error('User failed to authenticate')
         }
     } catch (err) {
+        console.log(err)
         res.status(401).json({err})
     }
 }
