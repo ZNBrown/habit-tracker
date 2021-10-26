@@ -1,11 +1,11 @@
 
-
 //Dyname Welcome <user>
 function welcomeUser(e) {
   e.preventDefault();
 	const welcomeMessage = document.getElementById('welcomeUser');
   
 	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
+
 
 }
 
@@ -39,6 +39,24 @@ const logOutBtn = document.getElementById('logout');
 
 logOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    let myHeaders = new Headers();
+    console.log(myHeaders.get('authorization'))
+
+    // const header = req.headers['authorization'];
+    //     if (header) {
+    //         let userEmail;
+    //         const token = header.split(' ')[1]
+    //         jwt.verify(token, process.env.SECRET, async (err, data) => {
+    //             if(err){
+    //                 console.log(err.message);
+    //                 next();
+    //             } else {
+    //                 userEmail = data.email
+    //             }
+    //         })
+    //         console.log(userEmail)
+    //         const habits = await Habit.create(req.body,userEmail)
+    //         res.status(200).json(habits)
     //localStorage.clear();
   
     //window.location.pathname = '/';
@@ -46,7 +64,6 @@ logOutBtn.addEventListener('click', (e) => {
 })
 
 
-<<<<<<< HEAD
 ////HABITS CONTAINER
 function renderHabits(){
   const hName = document.querySelector('#hName').value;
@@ -59,8 +76,6 @@ function renderHabits(){
 
 }
 
-=======
->>>>>>> b3c9ee907386d398bba444a55fe4c98785d0ebd3
 function  renderHabits() {
   const habitsContainer = document.getElementById('habitsContainer');
 
@@ -120,7 +135,6 @@ function  renderHabits() {
   closeModal.classList.add('hidden')
 }
 
-<<<<<<< HEAD
 
 
 ///////////////////check with the DB
@@ -172,5 +186,4 @@ function renderHabits(habits) {
   })
   return habitsContainer;
 }
-=======
->>>>>>> b3c9ee907386d398bba444a55fe4c98785d0ebd3
+

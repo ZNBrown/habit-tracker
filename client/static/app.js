@@ -27,11 +27,11 @@ async function loginHelper(e) {
     password:  e.target[1].value,
   }
   try{
+    console.log(postData)
     const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
-    console.log(newUser);
-    //window.location.href = "http://localhost:8080";
-    console.log("redirect")
-
+    console.log(newUser.data.token);
+    localStorage.setItem(newUser.data.token);
+    //window.location.href = "http://localhost:8080/profile";
   }
   catch
   {
@@ -51,9 +51,7 @@ async function signupHelper(e) {
   console.log(postData)
   try{
     const newUser = await axios.post(`http://localhost:3000/main/register`, postData);
-    console.log(newUser);
-    //window.location.href = "http://localhost:8080";
-    console.log("redirect")
+    console.log(newUser.data);
 
   }
   catch
