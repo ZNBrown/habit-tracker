@@ -38,35 +38,67 @@ logOutBtn.addEventListener('click', () => {
 })
 
 
+//////HABITS CONTAINER
 
+//render habits
+// const addHabitBtn = document.getElementById('submitHabit');
 
+// addHabitBtn.addEventListener('click', renderHabits);
 
-//////HABIT CONTAINER
-//delete habit
-// async function deleteHabit(e) {
-//   const habitId = e.target.closest("article").id;
+// function renderHabits() {
+//   const divHabits = document.createElement('div');
+//   divHabits.setAttribute('class', 'div-habits');
+  
+//   const habitTitle = document.createElement('h2');
+//   const hName = document.querySelector('#hName').value;
+  
+//   habitTitle.textContent = hName;
 
-//   const options = {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ id: habitId }),
-//   };
-
-//   await fetch(`${serverUrl}/habits`, options);
-//   getGraphData();
-//   e.target.closest("article").remove();
-//   M.toast({html: 'Habit Deleted!'})
-//   hideChart();
-
-//   let completedHabits = document.querySelectorAll("#completedHabits article");
-//   if (completedHabits.length === 0){
-//     document.getElementById("completedHabitsHiddenTitle").style.display = "none";
-//   }
-//   let activeHabits = document.querySelectorAll("#habits article");
-//   if (activeHabits.length === 0){
-//     document.getElementById("activeHabitsHiddenTitle").style.display = "none";
-//   }
-
+//   divHabits.append(habitTitle)
+//   return divHabits;
 // }
+
+function renderHabits(habits) {
+  const habitsContainer = document.getElementById('habitsContainer');
+
+  habits.forEach(habit => {
+    //create container for each habit
+    const habitDiv = document.createElement("div");
+    habitDiv.setAttribute("id", "habitDivs");
+
+    //add habit name
+    const hName = document.createElement("h2");
+    hName.setAttribute("id", "hName");
+
+    //add frequency
+    const hFrequency = document.createElement("p");
+    hFrequency.setAttribute("id", "hFrequency");
+
+    //add frequency target
+    const freqTarget = document.createElement("p");
+    freqTarget.setAttribute("id", "freqTarget");
+
+    //delete button
+    const deleteBtn = document.createElement('button');
+	  deleteBtn.textContent = 'Remove';
+	  deleteBtn.setAttribute('id', 'deleteBtn');
+
+
+    //insert data into elements
+    hName.textContent = habit.habit_name;
+    hFrequency = habit.frequency
+    freqTarget = habit.frequency_target;
+
+
+    //insert elements to the DOM
+    habitDiv.appendChild(hName);
+    habitDiv.appendChild(hFrequency);
+    habitDiv.appendChild(freqTarget);
+    habitDiv.appendChild(deleteBtn);
+
+    habitsContainer.appendChild(habitDiv)
+
+
+  })
+  return habitsContainer;
+}
