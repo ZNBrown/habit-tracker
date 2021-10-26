@@ -1,8 +1,13 @@
 const Habit = require('../model/HabitModel')
+
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+
 const jwt = require("jsonwebtoken");
 
 async function index(req, res) {
     try {
+        console.log("here in index controlller func")
         const habits = await Habit.all
         res.status(200).json(habits)
     } catch (err) {

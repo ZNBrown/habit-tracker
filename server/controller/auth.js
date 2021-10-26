@@ -20,6 +20,7 @@ async function create(req, res) {
 }
 async function login(req, res) {
     try {
+        console.log("here in login auth")
         const user = await User.findByEmail(req.body.email)
         if (!user) {
             throw new Error('No user with this email')

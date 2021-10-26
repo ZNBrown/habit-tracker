@@ -8,8 +8,13 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 
-const allRoutes = require('./routes/route')
+server.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+  }))
 
+const allRoutes = require('./routes/route')
 server.use('/main',allRoutes)
 
 

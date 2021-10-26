@@ -20,8 +20,13 @@ router.get('/loggy/logout', verifyToken, authController.logout)
 
 
 //habits
+<<<<<<< HEAD
+router.get('/habits/allHabits', verifyToken, habitController.index)
+router.post('/habits', verifyToken, habitController.create)
+=======
 router.get('/habit/allHabits', verifyToken, habitController.index)
 router.post('/habits', verifyToken,  habitController.create)
 
+>>>>>>> e44aa397282db05207160843b6e46d6208fd2259
 
 module.exports = router;

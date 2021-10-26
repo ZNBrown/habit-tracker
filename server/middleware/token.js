@@ -8,6 +8,13 @@ function verifyToken(req, res, next){
     if (header) {
         const token = header.split(' ')[1];
         jwt.verify(token, process.env.SECRET, async (err, data) => {
+<<<<<<< HEAD
+            console.log("this is in middleware")
+            console.log(data);
+            console.log("this is in middleware")
+
+=======
+>>>>>>> e44aa397282db05207160843b6e46d6208fd2259
             if(err){
                 res.status(403).json({ err: 'Invalid token' })
             } else {
@@ -19,6 +26,7 @@ function verifyToken(req, res, next){
     }
 }
 
+<<<<<<< HEAD
 
 
 /* .......redis validation .........*/
@@ -69,6 +77,29 @@ try {
 
 
 
+=======
+<<<<<<< HEAD
+// const checkUser = (req, res, next) => {
+//     const token = req.cookies.jwt;
+//     if (token) {
+//       jwt.verify(token, process.env.SECRET, async (err, decodedToken) => {
+//         if (err) {
+//           res.locals.user = null;
+//           next();
+//         } else {
+//           let user = await User.findById(decodedToken.id);
+//           res.locals.user = user;
+//           next();
+//         }
+//       });
+//     } else {
+//       res.locals.user = null;
+//       next();
+//     }
+//   };
+=======
+>>>>>>> e44aa397282db05207160843b6e46d6208fd2259
+>>>>>>> 1b9592196b2dcb2ebb048bd26482170f229f38d3
 module.exports = {
     verifyToken
 }
