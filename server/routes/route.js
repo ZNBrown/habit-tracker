@@ -4,12 +4,6 @@ const router = express.Router();
 const authController = require('../controller/auth')
 const userController = require('../controller/UserController')
 const habitController = require('../controller/HabitController')
-// let session = require('express-session')
-// router.use(session({
-//     secret: 'secret',
-//     saveUninitialized: true,
-//     resave: true
-//   }))
 
 //Users
 router.post('/register', authController.create)
@@ -20,6 +14,9 @@ router.get('/:user', verifyToken, userController.show)
 //habits
 router.get('/habit/allHabits', verifyToken, habitController.index)
 router.post('/habits', verifyToken,  habitController.create)
+router.delete('/habit/:id', verifyToken, habitController.destroy)
+router.patch('/habit/complete/:id', habitController.updateComp)
+router.patch('/habit/frequency/:id', habitController.updatefreq)
 
 
 module.exports = router;

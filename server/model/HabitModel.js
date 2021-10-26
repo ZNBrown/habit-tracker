@@ -35,10 +35,22 @@ class Habit {
         return new Promise(async (res, rej) => {
             try {
                 let habitData = await db.query(`SELECT * FROM Habits WHERE user_id = $1;`, [userId])
-                let habits = new Habit(habitData.rows[0])
+                let habits = habitData.rows.map(h => new Habit(h))
                 res(habits)
             } catch (err) {
-                rej(`Error fetching habits per id, err:${err}`)
+                rej(`Error fetching habits per user id, err:${err}`)
+            }
+        })
+    }
+
+    static findById(id){
+        return new Promise(async (res, rej) => {
+            try {
+                let selectQuery = await db.query(`SELECT * FROM Habits WHERE id = $1;`, [id])
+                let habits = new Habit(selectQuery.rows[0])
+                res(habits)
+            } catch (err) {
+                rej(`failed to retrieve habit: ${err}`)
             }
         })
     }
@@ -59,6 +71,40 @@ class Habit {
         })
     }
 
+    updateFrequencyTrack(){
+        return new Promise(async (res,rej) => {
+            try {
+                let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
+                let updateFreq = new Habit(updateQuery.rows[0])
+                res(updateFreq)
+            } catch (err) {
+                rej(`Failed to update frequency track: ${err}`)
+            }
+        })
+    }
+
+    updateComplete(){
+        return new Promise(async (res,rej) => {
+            try {
+                let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                let updateComp = new Habit(updateQuery.rows[0])
+                res(updateComp)
+            } catch (err) {
+                rej(`failed to update complete: ${err}`)
+            }
+        })
+    }
+    
+    del(){
+        return new Promise(async (res, rej) => {
+            try {
+                await db.query(`DELETE FROM Habits WHERE id = $1 RETURNING user_id;`,[this.id])
+                res('The habit has been deleted')
+            } catch (err) {
+                rej(`failed to delete habit: ${err}`)
+            }
+        })
+    }
 
 
 
