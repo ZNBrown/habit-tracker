@@ -42,15 +42,61 @@ logOutBtn.addEventListener('click', (e) => {
 
 
 //////HABITS CONTAINER
-function myFunction(){
-  const hName = document.querySelector('#hName').value;
-  const inputName = document.getElementById('habitsContainer');
+// function renderHabits(){
+//   const hName = document.querySelector('#hName').value;
+//   const inputName = document.getElementById('habitsContainer');
 
-  inputName.textContent = `My new habit is to ${hName}`;
+//   inputName.textContent = `My new habit is to ${hName}`;
+
+//   const closeModal = document.querySelector('.habit-modal')
+//   closeModal.classList.add('hidden')
+
+// }
+
+function  renderHabits() {
+  const habitsContainer = document.getElementById('habitsContainer');
+
+  //create div for each habit
+  const habitDiv = document.createElement("div");
+  habitDiv.setAttribute("id", "habitDiv");
+
+  //add habit name
+  const hNameElement = document.createElement("h2");
+  hNameElement.setAttribute("id", "hNameElement");
+
+  const hName = document.querySelector('#hName').value;
+  hNameElement.textContent = `${hName}`;
+
+  //add habit frequency
+  const hFrequencyElement = document.createElement("h3");
+  hFrequencyElement.setAttribute("id", "hFrequencyElement");
+
+  const hFrequency = document.querySelector('#hFrequency').value;
+  hFrequencyElement.textContent = `${hFrequency}`;
+
+  //add frequency target
+  const freqTargetElement = document.createElement("p");
+  freqTargetElement.setAttribute("id", "freqTargetElement");
+
+  const freqTarget = document.querySelector('#freqTarget').value;
+  freqTargetElement.textContent = `${freqTarget}`;
+
+  //add delete button
+  const deleteBtnElement = document.createElement('button');
+  deleteBtnElement.textContent = 'Remove';
+  deleteBtnElement.setAttribute('id', 'deleteBtn');
+
+  
+  //insert into DOM
+  habitDiv.appendChild(hNameElement);
+  habitDiv.appendChild(hFrequencyElement);
+  habitDiv.appendChild(freqTargetElement);
+  habitDiv.appendChild(deleteBtnElement);
+
+  habitsContainer.appendChild(habitDiv)
 
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
-
 }
 
 
