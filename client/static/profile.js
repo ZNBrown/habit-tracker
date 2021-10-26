@@ -69,6 +69,7 @@ function  renderHabits() {
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${freqTarget}`;
 
+
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
   fTargetDownElement.textContent = '-';
@@ -85,6 +86,7 @@ function  renderHabits() {
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
 
+
   
   //insert into DOM
   habitDiv.appendChild(hNameElement);
@@ -99,4 +101,7 @@ function  renderHabits() {
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
 }
+
+
+
 
