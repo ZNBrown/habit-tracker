@@ -5,5 +5,3 @@ submitHabit.addEventListener('submit', renderHabit);
 function renderHabit() {
 
 }
-
-

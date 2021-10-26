@@ -10,15 +10,8 @@ function parseJWT(token) {
 function welcomeUser(e) {
   //e.preventDefault();
 	const welcomeMessage = document.getElementById('welcomeUser');
-  
-  
 	welcomeMessage.textContent = `Welcome, ${parseJWT(localStorage.getItem('token')).username}`; //TO BE TESTED ONCE DB IS CONNECTED
-
-
 }
-
-
-
 //add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
 
@@ -41,7 +34,6 @@ function closeHabitForm() {
 }
 
 
-
 //log out button
 const logOutBtn = document.getElementById('logout');
 
@@ -49,26 +41,14 @@ logOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
     welcomeUser();
+    //localStorage.clear();
     
   
     //window.location.pathname = '/';
     //window.location.assign("<deploy homepage URL>") //MAIN CODE WHEN DB CONNECTS
 })
 
-
-////HABITS CONTAINER
-function renderHabits(){
-  const hName = document.querySelector('#hName').value;
-  const inputName = document.getElementById('habitsContainer');
-
-  inputName.textContent = `My new habit is to ${hName}`;
-
-  const closeModal = document.querySelector('.habit-modal')
-  closeModal.classList.add('hidden')
-
-}
-
-function  renderHabits() {
+async function renderHabits() {
   const habitsContainer = document.getElementById('habitsContainer');
 
   //create div for each habit
@@ -81,6 +61,7 @@ function  renderHabits() {
 
   const hName = document.querySelector('#hName').value;
   hNameElement.textContent = `${hName}`;
+
 
   //add habit frequency
   const hFrequencyElement = document.createElement("h3");
@@ -121,61 +102,23 @@ function  renderHabits() {
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
 
+  let postData = {
+    habit_name: hName,
+    habit_info: "Going Gym",
+    frequency: hFrequency,
+    frequency_target: freqTarget
+  }
+
+  console.log(`token is in profile ${localStorage.getItem('token')}`)
+  let response = await axios.post(`http://localhost:3000/main/habits`, postData, {
+    headers: {
+      'authorization': localStorage.getItem('token')
+    }
+  })
+  console.log(response)
+
   habitsContainer.appendChild(habitDiv)
 
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
 }
-
-
-
-///////////////////check with the DB
-const addHabitBtn = document.getElementById('submitHabit');
-
-addHabitBtn.addEventListener('click', renderHabits);
-
-function renderHabits(habits) {
-  const habitsContainer = document.getElementById('habitsContainer');
-
-  Object.keys(habits).forEach(habit => {
-    //create container for each habit
-    const habitDiv = document.createElement("div");
-    habitDiv.setAttribute("id", "habitDiv");
-
-    //add habit name
-    const hName = document.createElement("h2");
-    hName.setAttribute("id", "hName");
-
-    //add frequency
-    const hFrequency = document.createElement("p");
-    hFrequency.setAttribute("id", "hFrequency");
-
-    //add frequency target
-    const freqTarget = document.createElement("p");
-    freqTarget.setAttribute("id", "freqTarget");
-
-    //delete button
-    const deleteBtn = document.createElement('button');
-	  deleteBtn.textContent = 'Remove';
-	  deleteBtn.setAttribute('id', 'deleteBtn');
-
-
-    //insert data into elements
-    hName.textContent = habit.habit_name;
-    hFrequency = habit.frequency
-    freqTarget = habit.frequency_target;
-
-
-    //insert elements to the DOM
-    habitDiv.appendChild(hName);
-    habitDiv.appendChild(hFrequency);
-    habitDiv.appendChild(freqTarget);
-    habitDiv.appendChild(deleteBtn);
-
-    habitsContainer.appendChild(habitDiv)
-
-
-  })
-  return habitsContainer;
-}
-

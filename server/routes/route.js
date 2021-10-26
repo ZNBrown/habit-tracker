@@ -15,10 +15,6 @@ router.get('/allUsers', verifyToken, userController.index)
 router.get('/:user', verifyToken, userController.show)
 
 //habits
-
-router.get('/allHabits', verifyToken, habitController.index)
-router.post('/habits', verifyToken, habitController.create)
-
 router.get('/habit/allHabits', verifyToken, habitController.index)
 router.post('/habits', verifyToken,  habitController.create)
 router.delete('/habit/:id', verifyToken, habitController.destroy)
