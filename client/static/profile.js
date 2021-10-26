@@ -46,6 +46,7 @@ logOutBtn.addEventListener('click', (e) => {
 })
 
 
+<<<<<<< HEAD
 ////HABITS CONTAINER
 function renderHabits(){
   const hName = document.querySelector('#hName').value;
@@ -58,6 +59,8 @@ function renderHabits(){
 
 }
 
+=======
+>>>>>>> b3c9ee907386d398bba444a55fe4c98785d0ebd3
 function  renderHabits() {
   const habitsContainer = document.getElementById('habitsContainer');
 
@@ -86,6 +89,17 @@ function  renderHabits() {
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${freqTarget}`;
 
+  //add freqTargetDecrement
+  const fTargetDownElement = document.createElement('button');
+  fTargetDownElement.textContent = '-';
+  fTargetDownElement.setAttribute('id', "fTargetDownElement")
+
+  //add freqTargetIncrement
+  const fTargetUpElement = document.createElement('button');
+  fTargetUpElement.textContent = '+';
+  fTargetUpElement.setAttribute('id', "fTargetUpElement");
+
+  
   //add delete button
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
@@ -96,6 +110,8 @@ function  renderHabits() {
   habitDiv.appendChild(hNameElement);
   habitDiv.appendChild(hFrequencyElement);
   habitDiv.appendChild(freqTargetElement);
+  habitDiv.appendChild(fTargetDownElement);
+  habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
 
   habitsContainer.appendChild(habitDiv)
@@ -104,6 +120,7 @@ function  renderHabits() {
   closeModal.classList.add('hidden')
 }
 
+<<<<<<< HEAD
 
 
 ///////////////////check with the DB
@@ -155,3 +172,5 @@ function renderHabits(habits) {
   })
   return habitsContainer;
 }
+=======
+>>>>>>> b3c9ee907386d398bba444a55fe4c98785d0ebd3
