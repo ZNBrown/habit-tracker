@@ -28,6 +28,26 @@ describe('User', () => {
         })
     });
 
-   
+    // test for findByEmail
+
+    describe('findByEmail', () => {
+        test('it resolves with a user email on successful db query', async () => {
+            let userData = { username: 'testUser', password: 'testPassword', email: 'testEmail' };
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [userData] });
+            const result = await User.findByEmail('testEmail');
+            expect(result.email).toContain('testEmail')
+        })
+
+        test('the result should be an instance of User', async () => {
+            let userData = { username: 'testUser', password: 'testPassword', email: 'testEmail' };
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [userData] });
+            const result = await User.findByEmail('testEmail');
+            expect(result).toBeInstanceOf(User)
+        });
+
+
+    });
 
 });
