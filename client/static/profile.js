@@ -1,10 +1,18 @@
+function parseJWT(token) {
+  try {
+    return JSON.parse(atob(token.split('.')[1]))
+  } catch (error) {
+    return undefined
+  }
+}
 
 //Dyname Welcome <user>
 function welcomeUser(e) {
   e.preventDefault();
 	const welcomeMessage = document.getElementById('welcomeUser');
   
-	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
+  
+	welcomeMessage.textContent = `Welcome, ${parseJWT(localStorage.getItem('token')).username}`; //TO BE TESTED ONCE DB IS CONNECTED
 
 
 }
@@ -39,25 +47,8 @@ const logOutBtn = document.getElementById('logout');
 
 logOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    let myHeaders = new Headers();
-    console.log(myHeaders.get('authorization'))
 
-    // const header = req.headers['authorization'];
-    //     if (header) {
-    //         let userEmail;
-    //         const token = header.split(' ')[1]
-    //         jwt.verify(token, process.env.SECRET, async (err, data) => {
-    //             if(err){
-    //                 console.log(err.message);
-    //                 next();
-    //             } else {
-    //                 userEmail = data.email
-    //             }
-    //         })
-    //         console.log(userEmail)
-    //         const habits = await Habit.create(req.body,userEmail)
-    //         res.status(200).json(habits)
-    //localStorage.clear();
+    
   
     //window.location.pathname = '/';
     //window.location.assign("<deploy homepage URL>") //MAIN CODE WHEN DB CONNECTS

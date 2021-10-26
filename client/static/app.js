@@ -30,7 +30,7 @@ async function loginHelper(e) {
     console.log(postData)
     const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
     console.log(newUser.data.token);
-    localStorage.setItem(newUser.data.token);
+    localStorage.setItem('token', newUser.data.token);
     //window.location.href = "http://localhost:8080/profile";
   }
   catch
