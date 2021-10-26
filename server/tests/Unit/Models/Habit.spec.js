@@ -19,11 +19,21 @@ describe('Habit', () => {
         })
     });
 
-    //  test for create 
+    //  test to getHabitByUserId
+
+    // test to findById
+
+    // test to create a new habit
+
+    //test to updateFrequencyTrack
+
+    // test to updateReduceFrequency
+
+    // test to updateComplete
+
+    // test to delete
 
 
-
-    // test for findByEmail
 
 
 
