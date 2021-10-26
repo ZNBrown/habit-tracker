@@ -15,8 +15,9 @@ router.get('/:user', verifyToken, userController.show)
 router.get('/habit/allHabits', verifyToken, habitController.index)
 router.post('/habits', verifyToken,  habitController.create)
 router.delete('/habit/:id', verifyToken, habitController.destroy)
-router.patch('/habit/complete/:id', habitController.updateComp)
-router.patch('/habit/frequency/:id', habitController.updatefreq)
+router.patch('/habit/complete/:id', verifyToken,habitController.updateComp)
+router.patch('/habit/frequency/:id', verifyToken,habitController.updatefreq)
+router.patch('/habit/rfrequency/:id', verifyToken,habitController.reduceFreq)
 
 
 module.exports = router;

@@ -68,6 +68,16 @@ async function updatefreq (req, res){
     }
 }
 
+async function reduceFreq (req, res){
+    try {
+        const habit = await Habit.findById(req.params.id)
+        await habit.updateReduceFrequency()
+        res.status(200).end()
+    } catch (err) {
+        res.status(404).json({err})
+    }
+}
+
 async function destroy (req, res) {
     try {
         const habit = await Habit.findById(parseInt(req.params.id))
@@ -81,4 +91,4 @@ async function destroy (req, res) {
 }
 
 
-module.exports = { index, create, destroy, updatefreq, updateComp}
+module.exports = { index, create, destroy, updatefreq, updateComp, reduceFreq}
