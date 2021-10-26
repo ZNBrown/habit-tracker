@@ -21,6 +21,10 @@ signupLink.onclick = (()=>{
 ////////log in user
 const loginForm = document.querySelector('#login-form');
 
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+})
 
 
 
@@ -99,6 +103,6 @@ const loginForm = document.querySelector('#login-form');
 //     localStorage.setItem("username", tokenData.user);
 //   }
 
-//   window.location.assign(`https://the-stride.netlify.app/profile/`);
+//   window.location.assign(`https:///profile/`);
   
 // });
