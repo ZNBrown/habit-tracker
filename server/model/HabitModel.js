@@ -74,11 +74,29 @@ class Habit {
     updateFrequencyTrack(){
         return new Promise(async (res,rej) => {
             try {
-                let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
-                let updateFreq = new Habit(updateQuery.rows[0])
-                res(updateFreq)
+                if(this.frequency_track < this.frequency_target){
+                    let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateFreq = new Habit(updateQuery.rows[0])
+                    res(updateFreq)
+                } else {
+                    let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateComp = new Habit(comUpdateQuery.rows[0])
+                    res(updateComp)
+                }
             } catch (err) {
                 rej(`Failed to update frequency track: ${err}`)
+            }
+        })
+    }
+
+    updateReduceFrequency(){
+        return new Promise(async (res,rej) => {
+            try {
+                let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`,[this.id])
+                let reduceFreq = new Habit(updateQuery.rows[0])
+                res(reduceFreq)
+            } catch (err) {
+                rej(`failed to update frequency: ${err}`)
             }
         })
     }
@@ -86,9 +104,13 @@ class Habit {
     updateComplete(){
         return new Promise(async (res,rej) => {
             try {
-                let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
-                let updateComp = new Habit(updateQuery.rows[0])
-                res(updateComp)
+                if (this.frequency_track == this.frequency_target){
+                    let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateComp = new Habit(updateQuery.rows[0])
+                    res(updateComp)
+                }else{
+                    res('frequency track is not the same')
+                }
             } catch (err) {
                 rej(`failed to update complete: ${err}`)
             }
