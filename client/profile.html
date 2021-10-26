@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/styleprofile.css">
+    <script defer src="./static/profile.js"></script>
     <title>HTracker</title>
     <link rel="stylesheet" href="static/style-form.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -28,6 +29,7 @@
 
     <main>
         <div class="profilearea">        
+
             <div id="profile">
 
                 <p>My Profile: Welcome [name]</p>
@@ -35,7 +37,6 @@
                 <button id="addhabit">add habit</button>
 
             </div>
-
             
         </div>
 
@@ -45,34 +46,38 @@
 
                 <div id="one">
                 
-                    <div id="exercise"></div>
+                    <h1 id="exercise">klhflh</h1>
 
                 </div>
 
                 <div id="two">
                 
-                    <div id="frequency"></div>
+                    <h3 id="frequency">jbflk</h3>
 
                 </div>
 
                 <div id="three">
 
-                    <div id="pie"></div> 
+                    <h2 id="incrementText">0</h2> 
                     
-                    <div id="tick"></div>
+                    <button id="incBtn" onclick="incrementButton()">+</button>
 
-                    <div id="delete"></div>
+                    <button id="decBtn" onclick="decrementButton()">-</button>
+
+                    <button id="delete">Delete</button>
 
                 </div>           
                 
-            </div>
+            </div> 
+            
         </div>
     </main>
+    
     <div class="habit-modal hidden">
         <div class="popup-modal">
             <i id="closeHabit" class="fas fa-times"></i>
             <h1>New Habit</h1>
-            <form>
+            <form id="newhabit">
                 <label for="hName">Habit name:</label>
                 <input name="hName" type="text" id="hName" placeholder="e.g. drink water" autocomplete="off" required>
                 <label for="hFrequency">Frequency:</label>
