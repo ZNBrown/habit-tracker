@@ -8,7 +8,7 @@ function parseJWT(token) {
 
 //Dyname Welcome <user>
 function welcomeUser(e) {
-  e.preventDefault();
+  //e.preventDefault();
 	const welcomeMessage = document.getElementById('welcomeUser');
   
   
@@ -48,6 +48,7 @@ const logOutBtn = document.getElementById('logout');
 logOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
 
+    welcomeUser();
     
   
     //window.location.pathname = '/';
