@@ -48,5 +48,37 @@ async function create(req, res) {
     }
 }
 
+async function updateComp (req, res){
+    try {
+        const habit = await Habit.findById(req.params.id)
+        await habit.updateComplete()
+        res.status(200).end();
+    } catch (err) {
+        res.status(404).json({err})
+    }
+}
+async function updatefreq (req, res){
+    try {
+        const habit = await Habit.findById(req.params.id)
+        await habit.updateFrequencyTrack();
+        res.status(200).end();
+    } catch (err) {
+        console.log(err)    
+        res.status(404).json({err})
+    }
+}
 
-module.exports = { index, create }
+async function destroy (req, res) {
+    try {
+        const habit = await Habit.findById(parseInt(req.params.id))
+        console.log(habit)
+        await habit.del();
+        res.status(201).end();
+    } catch (err) {
+        console.log(err)
+        res.status(404).json({err})
+    }
+}
+
+
+module.exports = { index, create, destroy, updatefreq, updateComp}
