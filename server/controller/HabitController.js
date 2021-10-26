@@ -4,8 +4,21 @@ const jwt = require("jsonwebtoken");
 
 async function index(req, res) {
     try {
-        const habits = await Habit.all
-        res.status(200).json(habits)
+        const header = req.headers['authorization'];
+        if (header) {
+            let userId;
+            const token = header.split(' ')[1]
+            jwt.verify(token, process.env.SECRET, async (err, data) => {
+                if(err){
+                    console.log(err.message);
+                    next();
+                } else {
+                    userId = data.id
+                }
+            })
+            const habits = await Habit.getHabitByUserId(userId)
+            res.status(200).json(habits)
+        }
     } catch (err) {
         res.status(500).json({ err })
     }

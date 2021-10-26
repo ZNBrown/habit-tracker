@@ -35,7 +35,7 @@ class Habit {
         return new Promise(async (res, rej) => {
             try {
                 let habitData = await db.query(`SELECT * FROM Habits WHERE user_id = $1;`, [userId])
-                let habits = new Habit(habitData.rows[0])
+                let habits = habitData.rows.map(h => new Habit(h))
                 res(habits)
             } catch (err) {
                 rej(`Error fetching habits per id, err:${err}`)
@@ -58,7 +58,7 @@ class Habit {
             }
         })
     }
-
+    
 
 
 
