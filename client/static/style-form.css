@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 .habit-modal {
     display: grid;
     place-items: center;
@@ -14,21 +15,23 @@
 }
 
 .popup-modal {
-    background-color: rgb(167, 167, 167);
+    background-color: white;
     margin: auto;
     padding: 10px 5px;
-    border: 2px solid darkblue;
     width: 100%;
     max-width: 500px;
     text-align: center;
     place-items: center;
     border-radius: 10px;
-    box-shadow: 0px 10px 20px rgba(53, 53, 53, 0.616);
+    box-shadow: 1px 1px 4px white;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid rgb(226, 226, 226);
 }
 
 .popup-modal label {
     font-size: 20px;
     margin: 5px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .popup-modal input, select, #hFrequency  {
@@ -37,17 +40,28 @@
     border: 1.5px solid darkblue;
     padding: 8px 5px;
     margin: 10px 5px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 1px 1px 1px darkblue;
 }
 
 #submitHabit {
     width: 30%;
     margin: auto;
+    border-radius: 7px;
+    border-style: none;
     cursor: pointer;
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
 }
 
 #submitHabit:hover {
-    background-color: darkblue;
-    color: white;
+    background: white;
+    color: black;
+    box-shadow: 1px 1px 4px black;
+    font-family: 'Poppins', sans-serif;
+    
 }
 
 
@@ -58,7 +72,7 @@
 }
 
 .fa-times {
-    color: rgb(50, 50, 187);
+    color: #5e99f3;
     font-size: 30px;
     float: right;
     cursor: pointer;
