@@ -39,7 +39,7 @@
     </div>
 
     <div id="habitsContainer">
-        
+        <!--habitContainer created in profile.js-->
     </div>
 
     <!--<main>
@@ -73,11 +73,11 @@
             </div>
         </div>
     </main>-->
-    <div class="habit-modal hidden">
+    <div id="habitModal"class="habit-modal hidden">
         <div class="popup-modal">
             <i id="closeHabit" class="fas fa-times"></i>
             <h1>New Habit</h1>
-            <form>
+            <form id="habitForm">
                 <label for="hName">Habit name:</label>
                 <input name="hName" type="text" id="hName" placeholder="e.g. drink water" autocomplete="off" required>
                 <label for="hFrequency">Frequency:</label>
@@ -88,13 +88,13 @@
                 </select>
                 <label for="freqTarget">Frequency target:</label>
                 <input name="freqTarget" type="number" id="freqTarget" placeholder="2" min="1" max="5" required>
-                <input type="submit" id="submitHabit" value="Add habit">
+                <input onclick="myFunction()" type="button" id="submitHabit" value="Add habit">
             </form>
         </div>
     </div>
     <footer>
         <p>Hamsa, Henry, Zach, Zain & Zerh</p>
     </footer>
-    <script src="static/profile.js"></script>
+    <script defer src="static/profile.js"></script>
 </body>
 </html>

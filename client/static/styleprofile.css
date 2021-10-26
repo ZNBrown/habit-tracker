@@ -204,7 +204,48 @@ footer {
     position: absolute;
 }
 
+#habitsContainer {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+} 
 
+#habitDiv {
+    margin: 30px;
+    display: flex;
+    background-color: white;
+    width: 65%;
+    height: 60px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px white;
+}
 
+#hName {
+    font-size: 15px;
+    color: darkblue;
+}
 
+#hFrequency {
+    font-size: 12px;
+    color: darkblue;
+}
+
+#freqTarget {
+    font-size: 12px;
+    color: black;
+}
+
+#deleteBtn {
+    width: 25%;
+    margin: auto;
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+}
 
