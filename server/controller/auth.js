@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs')
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
+const session = require('express-session')
 
 
 const User = require('../model/UserModel')
@@ -23,7 +24,11 @@ async function login(req, res) {
         }
         const authed = bcrypt.compare(req.body.password, user.password)
         if (!!authed) {
+
+            const payload = { username: user.username, email: user.email }
+
             const payload = { id: user.id, username: user.username, email: user.email }
+
             const sendToken = (err, token) => {
                 if (err) { throw new Error('Error in token generation') }
                 res.status(200).json({
@@ -32,6 +37,11 @@ async function login(req, res) {
                 });
             }
             jwt.sign(payload, process.env.SECRET, { expiresIn: 6000000 }, sendToken);
+
+            let sess = req.session;
+            sess.email = user.email;
+            console.log(req.session.email)
+
         } else {
             throw new Error('User failed to authenticate')
         }

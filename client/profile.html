@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/styleprofile.css">
+    <link rel="icon" href="https://flaticons.net/icon.php?slug_category=user-interface&slug_icon=checkbox">
     <title>HTracker</title>
     <link rel="stylesheet" href="static/style-form.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -13,7 +14,7 @@
 
     <header>
         <div>
-            <h1 id="logo">Logo</h1>
+            <img id="logo" src="https://flaticons.net/icon.php?slug_category=user-interface&slug_icon=checkbox" alt="logo"></img>
         </div>
 
         <div>
@@ -25,19 +26,23 @@
         </div>
 
     </header>
+    <div class="profilearea">        
+        <div id="profile">
 
-    <main>
-        <div class="profilearea">        
-            <div id="profile">
+            <p id="welcomeUser"></p>
 
-                <p>My Profile: Welcome [name]</p>
+            <button id="addhabit">add habit</button>
 
-                <button id="addhabit">add habit</button>
-
-            </div>
-
-            
         </div>
+
+        
+    </div>
+
+    <div id="habitsContainer">
+        <!--habitContainer created in profile.js-->
+    </div>
+
+    <!--<main>
 
         <div class="habits">  
 
@@ -67,26 +72,29 @@
                 
             </div>
         </div>
-    </main>
-    <div class="habit-modal hidden">
+    </main>-->
+    <div id="habitModal"class="habit-modal hidden">
         <div class="popup-modal">
             <i id="closeHabit" class="fas fa-times"></i>
             <h1>New Habit</h1>
-            <form>
+            <form id="habitForm">
                 <label for="hName">Habit name:</label>
                 <input name="hName" type="text" id="hName" placeholder="e.g. drink water" autocomplete="off" required>
                 <label for="hFrequency">Frequency:</label>
                 <select name="hFrequency" id="hFrequency" required>
-                    <option value="freqDaily" selected="selected">Daily</option>
-                    <option value="freqWeekly">Weekly</option>
-                    <option value="freqMonthly">Monthly</option>
+                    <option value="Daily" selected="selected">Daily</option>
+                    <option value="Weekly">Weekly</option>
+                    <option value="Monthly">Monthly</option>
                 </select>
                 <label for="freqTarget">Frequency target:</label>
                 <input name="freqTarget" type="number" id="freqTarget" placeholder="2" min="1" max="5" required>
-                <input type="submit" id="submitHabit" value="Add habit">
+                <input onclick="renderHabits()" type="button" id="submitHabit" value="Add habit">
             </form>
         </div>
     </div>
-    <script src="static/profile.js"></script>
+    <footer>
+        <p>Hamsa, Henry, Zach, Zain & Zerh</p>
+    </footer>
+    <script defer src="static/profile.js"></script>
 </body>
 </html>
