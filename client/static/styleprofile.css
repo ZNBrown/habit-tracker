@@ -196,4 +196,12 @@ header {
     height: 25px;
 }
 
+footer {
+    color: rgb(80, 80, 80);
+    display: grid;
+    margin-left: 40%;
+    bottom: 0;
+    position: absolute;
+}
+
 
