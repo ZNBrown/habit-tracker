@@ -25,8 +25,6 @@ async function login(req, res) {
         const authed = bcrypt.compare(req.body.password, user.password)
         if (!!authed) {
 
-            const payload = { username: user.username, email: user.email }
-
             const payload = { id: user.id, username: user.username, email: user.email }
 
             const sendToken = (err, token) => {

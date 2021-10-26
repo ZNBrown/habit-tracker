@@ -1,14 +1,7 @@
 const Habit = require('../model/HabitModel')
-
-
-
-async function index(req, res) {
-    try {
-        const habits = await Habit.all
-        res.status(200).json(habits)
-
-const {checkUser} = require('../middleware/token')
 const jwt = require("jsonwebtoken");
+
+
 
 async function index(req, res) {
     try {
@@ -108,6 +101,4 @@ async function destroy (req, res) {
     }
 }
 
-
-module.exports = { index, create, destroy, updatefreq, updateComp, reduceFreq}
-
+module.exports = { index, create, destroy, updatefreq, updateComp, reduceFreq }
