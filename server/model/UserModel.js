@@ -1,10 +1,12 @@
 const db = require('../dbConfig/init')
 
+
 class User {
     constructor(data){
         this.username = data.username
         this.password = data.password
         this.email = data.email
+        this.id = data.id
     }
 
     static get all(){
@@ -35,6 +37,7 @@ class User {
     static findByEmail (email) {
         return new Promise(async (res,rej) => {
             try {
+                console.log("here")
                 let selectQuery = await db.query(`SELECT * FROM users WHERE email = $1;`, [email])
                 let user = new User(selectQuery.rows[0])
                 res(user)

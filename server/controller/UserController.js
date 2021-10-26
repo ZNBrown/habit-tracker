@@ -1,4 +1,6 @@
 const User = require('../model/UserModel')
+const { verifyToken } = require('../middleware/token');
+
 
 
 async function index (req, res) {
@@ -12,7 +14,8 @@ async function index (req, res) {
 
 async function show (req, res) {
     try {
-        const user = await User.findByEmail(req.params.email)
+        console.log("async function show")
+        const user = await User.findByEmail("email5")
         res.status(200).json(user)
     } catch (err) {
         res.status(500).json({err})

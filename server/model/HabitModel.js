@@ -1,5 +1,6 @@
 const db = require('../dbConfig/init')
 const User = require('./UserModel')
+const jwt = require("jsonwebtoken");
 
 
 // CREATE TABLE Habits (
@@ -27,7 +28,9 @@ class Habit {
         return new Promise(async (res, rej) => {
             try {
 
+                console.log("here in habits all")
                 let habitData = await db.query(`SELECT * FROM Habits`)
+                console.log(habitData.rows[0])
                 let habits = habitData.rows.map((h) => new Habit(h))
                 res(habits)
 
@@ -57,6 +60,7 @@ class Habit {
                 let frequency_track = 0;
                 let complete = false;
                 const { habit_name, habit_info, frequency, frequency_target} = habitData
+                console.log("habit create")
                 let user = await User.findByEmail(userEmail)
                 const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
                 const newHabit = new Habit(habits.rows[0]);
