@@ -1,14 +1,19 @@
 const jwt = require("jsonwebtoken");
+const User = require("../model/UserModel");
+const { head } = require("../server");
 
 function verifyToken(req, res, next){
     const header = req.headers['authorization'];
     if (header) {
         const token = header.split(' ')[1];
         jwt.verify(token, process.env.SECRET, async (err, data) => {
+<<<<<<< HEAD
             console.log("this is in middleware")
             console.log(data);
             console.log("this is in middleware")
 
+=======
+>>>>>>> e44aa397282db05207160843b6e46d6208fd2259
             if(err){
                 res.status(403).json({ err: 'Invalid token' })
             } else {
@@ -20,6 +25,7 @@ function verifyToken(req, res, next){
     }
 }
 
+<<<<<<< HEAD
 // const checkUser = (req, res, next) => {
 //     const token = req.cookies.jwt;
 //     if (token) {
@@ -38,6 +44,8 @@ function verifyToken(req, res, next){
 //       next();
 //     }
 //   };
+=======
+>>>>>>> e44aa397282db05207160843b6e46d6208fd2259
 module.exports = {
     verifyToken
 }
