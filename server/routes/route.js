@@ -5,6 +5,11 @@ const authController = require('../controller/auth')
 const userController = require('../controller/UserController')
 const habitController = require('../controller/HabitController')
 // let session = require('express-session')
+// router.use(session({
+//     secret: 'secret',
+//     saveUninitialized: true,
+//     resave: true
+//   }))
 
 //Users
 router.post('/register', authController.create)
@@ -13,7 +18,8 @@ router.get('/allUsers', verifyToken, userController.index)
 router.get('/:user', verifyToken, userController.show)
 
 //habits
-router.get('/allHabits', verifyToken, habitController.index)
-router.post('/habits', verifyToken, habitController.create)
+router.get('/habit/allHabits', verifyToken, habitController.index)
+router.post('/habits', verifyToken,  habitController.create)
+
 
 module.exports = router;
