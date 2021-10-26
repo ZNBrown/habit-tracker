@@ -55,7 +55,7 @@ h2 {
 .wrapper .title-text{
   display: flex;
   width: 200%;
-  color: black;
+  color: darkblue;
 }
 .wrapper .title{
   width: 50%;
@@ -214,5 +214,8 @@ form .btn input[type="submit"]{
 }
 
 footer {
-    color: rgb(80, 80, 80);
+  color: rgb(80, 80, 80);
+  bottom: 0;
+  position: fixed;
+  margin-bottom: 10px;
 }

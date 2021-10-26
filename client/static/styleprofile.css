@@ -1,12 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
 body{
-    margin: 0;
-    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(-45deg, #1f0101, #16060e, #01141b, #011f18);
+    background-size: 300% 300%;
+    animation: gradient 11s ease infinite;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  @keyframes gradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+
+#logo {
+    width: 50px;
+    height: 50px;
+    margin-top:10px;
     
 }
 
 h1 {
     color: white;
-    
+}
+
+#welcomeUser {
+    color: black;
+    font-size: 15px;
 }
 
 header {
@@ -23,10 +50,22 @@ header {
 }
 
 #logout {
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
+    width: 80px;
+    height: 40px;
     align-content: center;
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    box-shadow: 1px 1px 4px white;
+    font-family: 'Poppins', sans-serif;
+}
+
+#logout:hover {
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
 }
 
 .profilearea {
@@ -41,9 +80,9 @@ header {
     display: flex;
     background-color: white;
     width: 65%;
-    height: 50px;
-    border: 2px solid black;
+    height: 60px;
     border-radius: 10px;
+    box-shadow: 1px 1px 4px white;
 }
 
 #profile p {
@@ -52,10 +91,23 @@ header {
 
 #addhabit {
     margin: 10px 10px 10px auto;
-
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
 }
 
-.habits {
+#addhabit:hover {
+    background: white;
+    color: black;
+    box-shadow: 1px 1px 4px black;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* .habits {
     margin: 10px;
     display: flex;
     justify-content: center;
@@ -69,11 +121,11 @@ header {
     background-color: white;
     width: 65%;
     height: 150px;
-    border: 2px solid black;
     border-radius: 10px;
-}
+    box-shadow: 1px 1px 4px white;
+} */
 
-#one {
+/* #one {
     display: flex;
     background-color: white;
     width: 200px;
@@ -96,19 +148,19 @@ header {
     background-color: white;
     width: 300px;
     height: 50px;
-    
-}
+     */
 
-#frequency {
+
+/* #frequency {
     margin-top: 10px;
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
     width: 100%;
     height: 25px;
-}
+} */
 
-#three {
+/* #three {
     margin-left: 5px;
     display: grid;
     grid-template-columns: 58% 16% 25%;
@@ -133,7 +185,7 @@ header {
     border-radius: 5px;
     width: 80%;
     height: 25px;    
-}
+} */
 
 #delete {
     margin: 10px;
@@ -142,6 +194,92 @@ header {
     border-radius: 5px;
     width: 90%;
     height: 25px;
+}
+
+footer {
+    color: rgb(80, 80, 80);
+    display: grid;
+    margin-left: 40%;
+    bottom: 0;
+}
+
+#habitsContainer {
+    margin: 10px;
+    display: grid;
+    justify-content: center;
+} 
+
+#habitDiv {
+    margin: 30px;
+    display: block;
+    background-color: white;
+    width: 600px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 1px 1px 4px white;
+}
+
+#hNameElement {
+    font-size: 30px;
+    color: darkblue;
+    text-align: center;
+}
+
+#hFrequencyElement {
+    font-size: 20px;
+    color: darkblue;
+    text-align: center;
+    margin-top: -20px;
+
+
+}
+
+#freqTargetElement {
+    font-size: 19px;
+    color: black;
+    text-align: center;
+}
+
+#deleteBtn {
+    width: 15%;
+    border-radius: 7px;
+    border-style: none;
+    cursor: pointer;
+    background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+    color: white;
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    float: right;
+    margin-right: 8px;
+    height: 12%;
+    margin-top: 3px;
+}
+
+#fTargetUpElement {
+    width: 15%;
+    border: 1px solid darkblue;
+    color: white;
+    font-size: 17px;
+    text-align: center;
+    background-color: rgb(23, 34, 5);
+    box-shadow: 1px 1px 4px rgb(184, 184, 184);
+    margin-left: 2%;
+    margin-bottom: 15px;
+    height: 10%;
+    cursor: pointer;
+}
+
+#fTargetDownElement {
+    width: 15%;
+    border: 1px solid darkblue;
+    color: white;
+    font-size: 17px;
+    margin-left: 34%;
+    background-color: rgb(46, 1, 1);
+    box-shadow: 1px 1px 4px rgb(184, 184, 184);
+    margin-bottom: 15px;
+    height: 10%;
+    cursor: pointer;
 }
 
 
