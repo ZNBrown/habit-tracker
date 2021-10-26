@@ -2,18 +2,12 @@ const db = require('../dbConfig/init')
 const User = require('./UserModel')
 
 
-// CREATE TABLE Habits (
-//     id SERIAL PRIMARY KEY,
-//     habit_name varchar(100) NOT NULL,
-//     habit_info varchar(255),
-//     frequency varchar(100) NOT NULL,
-//     frequency_target int NOT NULL,
-//     complete BOOLEAN NOT NULL,
-//     user_id INT
-// );
 
 class Habit {
     constructor(data) {
+
+
+        this.id = data.id;
         this.habit_name = data.habit_name;
         this.habit_info = data.habit_info;
         this.frequency = data.frequency;
@@ -28,7 +22,7 @@ class Habit {
             try {
 
                 let habitData = await db.query(`SELECT * FROM Habits`)
-                let habits = habitData.rows.map((h) => new Habit(h))
+                let habits = habitData.rows.map(h => new Habit(h))
                 res(habits)
 
             } catch (err) {
@@ -43,10 +37,22 @@ class Habit {
         return new Promise(async (res, rej) => {
             try {
                 let habitData = await db.query(`SELECT * FROM Habits WHERE user_id = $1;`, [userId])
-                let habits = new Habit(habitData.rows[0])
+                let habits = habitData.rows.map(h => new Habit(h))
                 res(habits)
             } catch (err) {
-                rej(`Error fetching habits per id, err:${err}`)
+                rej(`Error fetching habits per user id, err:${err}`)
+            }
+        })
+    }
+
+    static findById(id){
+        return new Promise(async (res, rej) => {
+            try {
+                let selectQuery = await db.query(`SELECT * FROM Habits WHERE id = $1;`, [id])
+                let habits = new Habit(selectQuery.rows[0])
+                res(habits)
+            } catch (err) {
+                rej(`failed to retrieve habit: ${err}`)
             }
         })
     }
@@ -63,6 +69,79 @@ class Habit {
                 res(newHabit)
             } catch (err) {
                 rej(`Failed to create Habit ${err}`)
+            }
+        })
+    }
+
+    updateFrequencyTrack(){
+        return new Promise(async (res,rej) => {
+            try {
+                if(this.frequency_track < this.frequency_target){
+                    let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateFreq = new Habit(updateQuery.rows[0])
+                    res(updateFreq)
+                } else {
+                    let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateComp = new Habit(comUpdateQuery.rows[0])
+                    res(updateComp)
+                }
+            } catch (err) {
+                rej(`Failed to update frequency track: ${err}`)
+            }
+        })
+    }
+
+    updateReduceFrequency(){
+        return new Promise(async (res,rej) => {
+            try {
+                let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`,[this.id])
+                let reduceFreq = new Habit(updateQuery.rows[0])
+                res(reduceFreq)
+            } catch (err) {
+                rej(`failed to update frequency: ${err}`)
+            }
+        })
+    }
+
+    updateComplete(){
+        return new Promise(async (res,rej) => {
+            try {
+                if (this.frequency_track == this.frequency_target){
+                    let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                    let updateComp = new Habit(updateQuery.rows[0])
+                    res(updateComp)
+                }else{
+                    res('frequency track is not the same')
+                }
+            } catch (err) {
+                rej(`failed to update complete: ${err}`)
+            }
+        })
+    }
+
+
+    static create(habitData, userEmail) {
+        return new Promise(async (res, rej) => {
+            try {
+                let frequency_track = 0;
+                let complete = false;
+                const { habit_name, habit_info, frequency, frequency_target} = habitData
+                let user = await User.findByEmail(userEmail)
+                const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
+                const newHabit = new Habit(habits.rows[0]);
+                res(newHabit)
+            } catch (err) {
+                rej(`Failed to create Habit ${err}`)
+
+    
+    del(){
+        return new Promise(async (res, rej) => {
+            try {
+                await db.query(`DELETE FROM Habits WHERE id = $1 RETURNING user_id;`,[this.id])
+                res('The habit has been deleted')
+            } catch (err) {
+                rej(`failed to delete habit: ${err}`)
+
             }
         })
     }
