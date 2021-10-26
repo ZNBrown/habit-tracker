@@ -1,6 +1,8 @@
 const User = require('../model/UserModel')
 
 
+
+
 async function index (req, res) {
     try {
         const users = await User.all
@@ -9,6 +11,7 @@ async function index (req, res) {
         res.status(500).json({err})
     }
 }
+
 
 async function show (req, res) {
     try {

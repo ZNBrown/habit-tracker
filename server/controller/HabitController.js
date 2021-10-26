@@ -1,5 +1,4 @@
 const Habit = require('../model/HabitModel')
-const {checkUser} = require('../middleware/token')
 const jwt = require("jsonwebtoken");
 
 async function index(req, res) {

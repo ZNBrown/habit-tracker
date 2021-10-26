@@ -16,6 +16,8 @@ router.post('/register', authController.create)
 router.post('/login', authController.login)
 router.get('/allUsers', verifyToken, userController.index)
 router.get('/:user', verifyToken, userController.show)
+router.get('/loggy/logout', verifyToken, authController.logout)
+
 
 //habits
 router.get('/habit/allHabits', verifyToken, habitController.index)
