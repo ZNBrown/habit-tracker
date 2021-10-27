@@ -44,7 +44,7 @@ class Habit {
         })
     }
 
-    static findById(id){
+    static findById(id) {
         return new Promise(async (res, rej) => {
             try {
                 let selectQuery = await db.query(`SELECT * FROM Habits WHERE id = $1;`, [id])
@@ -76,16 +76,16 @@ class Habit {
         })
     }
 
-    updateFrequencyTrack(){
-        return new Promise(async (res,rej) => {
+    updateFrequencyTrack() {
+        return new Promise(async (res, rej) => {
             try {
-                if(this.frequency_track < this.frequency_target){
-                    let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
+                if (this.frequency_track < this.frequency_target) {
+                    let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`, [this.id])
                     let updateFreq = new Habit(updateQuery.rows[0])
                     console.log(`update freq is ${JSON.stringify(updateFreq)}`)
                     res(JSON.stringify(updateFreq))
                 } else {
-                    let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                    let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`, [this.id])
                     let updateComp = new Habit(comUpdateQuery.rows[0])
                     res(updateComp)
                 }
@@ -95,10 +95,10 @@ class Habit {
         })
     }
 
-    updateReduceFrequency(){
-        return new Promise(async (res,rej) => {
+    updateReduceFrequency() {
+        return new Promise(async (res, rej) => {
             try {
-                let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`,[this.id])
+                let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`, [this.id])
                 let reduceFreq = new Habit(updateQuery.rows[0])
                 res(reduceFreq)
             } catch (err) {
@@ -107,14 +107,14 @@ class Habit {
         })
     }
 
-    updateComplete(){
-        return new Promise(async (res,rej) => {
+    updateComplete() {
+        return new Promise(async (res, rej) => {
             try {
-                if (this.frequency_track == this.frequency_target){
-                    let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
+                if (this.frequency_track == this.frequency_target) {
+                    let updateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`, [this.id])
                     let updateComp = new Habit(updateQuery.rows[0])
                     res(updateComp)
-                }else{
+                } else {
                     res('frequency track is not the same')
                 }
             } catch (err) {
@@ -124,11 +124,11 @@ class Habit {
     }
 
 
-    
-    del(){
+
+    del() {
         return new Promise(async (res, rej) => {
             try {
-                await db.query(`DELETE FROM Habits WHERE id = $1 RETURNING user_id;`,[this.id])
+                await db.query(`DELETE FROM Habits WHERE id = $1 RETURNING user_id;`, [this.id])
                 res('The habit has been deleted')
             } catch (err) {
                 rej(`failed to delete habit: ${err}`)

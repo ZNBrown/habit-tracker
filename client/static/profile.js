@@ -208,6 +208,8 @@ async function renderHabit(habit) {
   
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
+
+  
 }
 
 
