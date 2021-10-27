@@ -33,6 +33,6 @@ describe('upper body test', () => {
 
 describe('body rendering', () => {
     beforeAll(()=> {
-        document.documentElement.innerHTML = 
+        document.documentElement.innerHTML = ``
     })
 })
