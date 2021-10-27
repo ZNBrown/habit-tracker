@@ -5,7 +5,6 @@ const authController = require('../controller/auth')
 const userController = require('../controller/UserController')
 const habitController = require('../controller/HabitController')
 
-// let session = require('express-session')
 
 
 //Users
@@ -15,11 +14,8 @@ router.get('/allUsers', verifyToken, userController.index)
 router.get('/:user', verifyToken, userController.show)
 
 //habits
-
-router.get('/allHabits', verifyToken, habitController.index)
-router.post('/habits', verifyToken, habitController.create)
-
 router.get('/habit/allHabits', verifyToken, habitController.index)
+router.get('/habit/:id', verifyToken, habitController.show)
 router.post('/habits', verifyToken,  habitController.create)
 router.delete('/habit/:id', verifyToken, habitController.destroy)
 router.patch('/habit/complete/:id', verifyToken,habitController.updateComp)
