@@ -87,7 +87,6 @@ async function reduceFreq(req, res) {
 async function destroy(req, res) {
     try {
         const habit = await Habit.findById(parseInt(req.params.id))
-        console.log(habit)
         await habit.del();
         res.status(201).end();
     } catch (err) {
