@@ -43,7 +43,7 @@ logOutBtn.addEventListener('click', (e) => {
 
 function  renderHabits() {
   const habitsContainer = document.getElementById('habitsContainer');
-
+  
   //create div for each habit
   const habitDiv = document.createElement("div");
   habitDiv.setAttribute("id", "habitDiv");
@@ -66,25 +66,57 @@ function  renderHabits() {
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  const freqTarget = document.querySelector('#freqTarget').value;
-  freqTargetElement.textContent = `${freqTarget}`;
+  let defaultTrack = 0
 
+  const freqTarget = document.querySelector('#freqTarget').value;
+  freqTargetElement.textContent = `${defaultTrack} / ${freqTarget}`;
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
   fTargetDownElement.textContent = '-';
   fTargetDownElement.setAttribute('id', "fTargetDownElement")
+  fTargetDownElement.onclick=decrementButton
+
+  function decrementButton() {
+    var element = document.getElementById('defaultTrack')
+    var value = element.innerHTML;
+
+    --value;
+
+    console.log(value);
+    document.getElementById('defaultTrack').innerHTML = value;
+  }
 
   //add freqTargetIncrement
   const fTargetUpElement = document.createElement('button');
   fTargetUpElement.textContent = '+';
   fTargetUpElement.setAttribute('id', "fTargetUpElement");
+  fTargetUpElement.onclick=incrementButton
+
+  function incrementButton() {
+    var element = document.getElementById('defaultTrack')
+    var value = element.innerHTML;
+
+    ++value;
+
+    console.log(value);
+    document.getElementById('defaultTrack').innerHTML = value;
+  }
 
   
   //add delete button
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
+  deleteBtnElement.onclick=removeNode
+
+  function removeNode() {
+    const habit = document.getElementById("habitDiv")
+    const parent = habit.parentNode;
+    parent.removeChild(habit);
+    console.log("done");
+  }
+  
 
 
   
@@ -96,10 +128,36 @@ function  renderHabits() {
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
 
-  habitsContainer.appendChild(habitDiv)
+  
+
+  const element = document.getElementById("habitsContainer");
+  element.insertBefore(habitDiv, element.firstChild);
+
+  //example method for posting all this gathered data to the API
+  //can then fail to append assembled object if server doesnt like it
+  // let postData = {
+  //   habit_name: hName,
+  ////   habit_info: "Going Gym", //redundant/not gathered, possibly trim from db
+  //   frequency: hFrequency,
+  //   frequency_target: freqTarget
+  // }
+
+  // console.log(`token is in profile ${localStorage.getItem('token')}`)
+  //  let response = await fetch(`http://localhost:3000/main/habits`,   {
+  //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'authorization': localStorage.getItem('token')
+  //   },
+  //   body: postData
+  // }
+  // })
+
 
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
+
+  
 }
 
 
