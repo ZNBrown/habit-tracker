@@ -66,24 +66,58 @@ function  renderHabits() {
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  const freqTarget = document.querySelector('#freqTarget').value;
-  freqTargetElement.textContent = `${freqTarget}`;
+  let defaultTrack = 0
 
+  const freqTarget = document.querySelector('#freqTarget').value;
+  freqTargetElement.textContent = `${defaultTrack} / ${freqTarget}`;
+
+  
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
   fTargetDownElement.textContent = '-';
   fTargetDownElement.setAttribute('id', "fTargetDownElement")
+  fTargetDownElement.onclick=decrementButton
+
+  function decrementButton() {
+    var element = document.getElementById('defaultTrack')
+    var value = element.innerHTML;
+
+    --value;
+
+    console.log(value);
+    document.getElementById('defaultTrack').innerHTML = value;
+  }
 
   //add freqTargetIncrement
   const fTargetUpElement = document.createElement('button');
   fTargetUpElement.textContent = '+';
   fTargetUpElement.setAttribute('id', "fTargetUpElement");
+  fTargetUpElement.onclick=incrementButton
+
+  function incrementButton() {
+    var element = document.getElementById('defaultTrack')
+    var value = element.innerHTML;
+
+    ++value;
+
+    console.log(value);
+    document.getElementById('defaultTrack').innerHTML = value;
+  }
 
   
   //add delete button
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
+  deleteBtnElement.onclick=removeNode
+
+  function removeNode() {
+    const habit = document.getElementById("habitDiv")
+    const parent = habit.parentNode;
+    parent.removeChild(habit);
+    console.log("done");
+  }
+  
 
   
   //insert into DOM
