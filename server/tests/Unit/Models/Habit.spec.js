@@ -130,7 +130,7 @@ describe('Habit', () => {
                 frequency_target: 3, complete: false, user_id: 1
             });
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({ rows: [{ ...testHabit, complete: true, id: 1 }] });
+                .mockResolvedValueOnce({ rows: [{ ...testHabit }] });
             const result = await testHabit.del();
             expect(result).toBe('The habit has been deleted')
         })
