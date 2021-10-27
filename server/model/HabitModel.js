@@ -5,6 +5,8 @@ const User = require('./UserModel')
 
 class Habit {
     constructor(data) {
+
+
         this.id = data.id;
         this.habit_name = data.habit_name;
         this.habit_info = data.habit_info;
@@ -116,6 +118,8 @@ class Habit {
             }
         })
     }
+
+
     
     del(){
         return new Promise(async (res, rej) => {
@@ -124,9 +128,11 @@ class Habit {
                 res('The habit has been deleted')
             } catch (err) {
                 rej(`failed to delete habit: ${err}`)
+
             }
         })
     }
+
 
 
 

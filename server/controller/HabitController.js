@@ -1,5 +1,4 @@
 const Habit = require('../model/HabitModel')
-const {checkUser} = require('../middleware/token')
 const jwt = require("jsonwebtoken");
 
 async function index(req, res) {
@@ -19,6 +18,7 @@ async function index(req, res) {
             const habits = await Habit.getHabitByUserId(userId)
             res.status(200).json(habits)
         }
+
     } catch (err) {
         res.status(500).json({ err })
     }
@@ -26,6 +26,11 @@ async function index(req, res) {
 
 async function create(req, res) {
     try {
+
+        console.log(req.session.email)
+        const habits = await Habit.create(req.body)
+        res.status(200).json(habits)
+
         const header = req.headers['authorization'];
         if (header) {
             let userEmail;
@@ -42,11 +47,13 @@ async function create(req, res) {
             const habits = await Habit.create(req.body,userEmail)
             res.status(200).json(habits)
         }
+
     } catch (err) {
         console.log(err)
         res.status(500).json({ err })
     }
 }
+
 
 async function updateComp (req, res){
     try {
