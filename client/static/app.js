@@ -19,8 +19,6 @@ signupLink.onclick = (()=>{
 
 
 ////////log in user
-const loginForm = document.querySelector('#login-form');
-
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -94,8 +92,14 @@ loginForm.addEventListener('submit', async (e) => {
 //     return;
 //   }
 
+
+////not sure if we can access jwt_decode here
+////if not, can decode in native js with JSON.parse(atob(token.split('.')[1]))
+////will also need to shove the jwt into local storage, even if we pull out of the data (need to pass it back to server)
+
 //   if (requestType === "#login") {
 //     const userData = jwt_decode(tokenData.token);
+//
 //     localStorage.setItem("userId", userData.id);
 //     localStorage.setItem("username", userData.user);
 //   } else {

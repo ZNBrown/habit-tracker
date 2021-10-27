@@ -25,8 +25,14 @@ async function requestLogin(data) {
 // delete a habit
 async function deleteHabit(id){
     try {
-        const options = { method: 'DELETE' }
+        const options = { method: 'DELETE',
+		// headers: {
+		// 	'authorization': localStorage.getItem('token')
+		//   }
+		//need the jwt to let the server know we are logged in
+	}
         await fetch(`http://localhost:3000/habit/${id}`, options);
+		
         window.location.hash = `#habit`
     } catch (err) {
         console.warn(err);

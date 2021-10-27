@@ -107,13 +107,22 @@ header {
     font-family: 'Poppins', sans-serif;
 }
 
+#decBtn {
+    margin: 10px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 80%;
+    height: 25px;    
+}
+
 
 #delete {
     margin: 10px;
     background-color: white;
     border: 1px solid black;
     border-radius: 5px;
-    width: 90%;
+    width: 92.5%;
     height: 25px;
 }
 
