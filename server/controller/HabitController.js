@@ -26,11 +26,10 @@ async function index(req, res) {
 
 async function show(req, res){
     try {
-
         let habitId = req.params.id
         const habits = await Habit.findById(habitId)
+        habits.updateTime()
         res.status(200).json(habits)
-
     } catch (err) {
         res.status(500).json({ err })
     }
@@ -55,7 +54,6 @@ async function create(req, res) {
             const habits = await Habit.create(req.body, userEmail)
             res.status(200).json(habits)
         }
-
     } catch (err) {
         console.log(err)
         res.status(500).json({ err })
@@ -72,6 +70,7 @@ async function updateComp (req, res){
         res.status(404).json({err})
     }
 }
+
 async function updatefreq (req, res){
     try {
         const habit = await Habit.findById(req.params.id)
