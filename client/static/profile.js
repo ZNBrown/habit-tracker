@@ -186,9 +186,22 @@ async function renderHabit(habit) {
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
-  deleteBtnElement.onclick= function (e) { 
+  deleteBtnElement.onclick=  async function (e) { 
     let parent = this.parentNode;
+    try {
+      const options = { method: 'DELETE',
+      headers: {
+        'authorization': localStorage.getItem('token')
+        }
+      //need the jwt to let the server know we are logged in
+      }
+      await fetch(`http://localhost:3000/main/habit/${habit.id}`, options);
+      
+    } catch (err) {
+      console.log(err)
+    }
     parent.remove()
+
   }
   
 
@@ -206,23 +219,8 @@ async function renderHabit(habit) {
   const element = document.getElementById("habitsContainer");
   element.insertBefore(habitDiv, element.firstChild);
 
-  
 
- 
-  let postData = {
-    habit_name: hName,
-    frequency: hFrequency,
-    frequency_target: freqTarget
-  }
   console.log(`token is in profile ${localStorage.getItem('token')}`)
-   let response = fetch(`http://localhost:3000/main/habits`,   {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-      'Content-Type': 'application/json',
-      'authorization': localStorage.getItem('token')
-    },
-    body: postData
-  });
 
 
   const closeModal = document.querySelector('.habit-modal')

@@ -5,7 +5,6 @@ const authController = require('../controller/auth')
 const userController = require('../controller/UserController')
 const habitController = require('../controller/HabitController')
 
-// let session = require('express-session')
 
 
 //Users
