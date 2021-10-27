@@ -219,23 +219,8 @@ async function renderHabit(habit) {
   const element = document.getElementById("habitsContainer");
   element.insertBefore(habitDiv, element.firstChild);
 
-  
 
- 
-  let postData = {
-    habit_name: hName,
-    frequency: hFrequency,
-    frequency_target: freqTarget
-  }
   console.log(`token is in profile ${localStorage.getItem('token')}`)
-   let response = fetch(`http://localhost:3000/main/habits`,   {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    headers: {
-      'Content-Type': 'application/json',
-      'authorization': localStorage.getItem('token')
-    },
-    body: postData
-  });
 
 
   const closeModal = document.querySelector('.habit-modal')
