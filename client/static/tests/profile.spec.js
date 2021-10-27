@@ -12,7 +12,7 @@ describe('upper body test', () => {
 
     test('header title has "Welcome"', () => {
         const welcomeMessage = myFuns.welcomeUser(e);
-        expec(welcomeMessage).toContain('Welcome');
+        expect(welcomeMessage).toContain('Welcome');
     })
 
     test('add new habit displays habit-modal', () => {
