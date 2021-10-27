@@ -34,6 +34,7 @@ loginForm.addEventListener('submit', async (e) => {
     console.log(newUser.data.token);
     localStorage.setItem('token', newUser.data.token);
     window.location.href = "profile.html";
+
   }
   catch
   {
