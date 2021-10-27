@@ -156,6 +156,8 @@ function  renderHabits() {
 
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
+
+  
 }
 
 
