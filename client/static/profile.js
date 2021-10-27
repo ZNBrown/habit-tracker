@@ -43,7 +43,7 @@ logOutBtn.addEventListener('click', (e) => {
 
 function  renderHabits() {
   const habitsContainer = document.getElementById('habitsContainer');
-
+  
   //create div for each habit
   const habitDiv = document.createElement("div");
   habitDiv.setAttribute("id", "habitDiv");
@@ -128,7 +128,10 @@ function  renderHabits() {
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
 
-  habitsContainer.appendChild(habitDiv)
+  
+
+  const element = document.getElementById("habitsContainer");
+  element.insertBefore(habitDiv, element.firstChild);
 
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
