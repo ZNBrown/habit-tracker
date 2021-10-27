@@ -186,9 +186,22 @@ async function renderHabit(habit) {
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
-  deleteBtnElement.onclick= function (e) { 
+  deleteBtnElement.onclick=  async function (e) { 
     let parent = this.parentNode;
+    try {
+      const options = { method: 'DELETE',
+      headers: {
+        'authorization': localStorage.getItem('token')
+        }
+      //need the jwt to let the server know we are logged in
+      }
+      await fetch(`http://localhost:3000/main/habit/${habit.id}`, options);
+      
+    } catch (err) {
+      console.log(err)
+    }
     parent.remove()
+
   }
   
 
