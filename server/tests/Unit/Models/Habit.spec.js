@@ -123,6 +123,19 @@ describe('Habit', () => {
 
     // test to delete
 
+    describe('del', () => {
+        test('it resolves with updated habit on successful db query', async () => {
+            let testHabit = new Habit({
+                habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 3,
+                frequency_target: 3, complete: false, user_id: 1
+            });
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [{ ...testHabit, complete: true, id: 1 }] });
+            const result = await testHabit.del();
+            expect(result).toBe('The habit has been deleted')
+        })
+    });
+
 
 
 
