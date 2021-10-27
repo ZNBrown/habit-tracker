@@ -38,7 +38,6 @@ class User {
             try {
 
                 let selectQuery = await db.query(`SELECT * FROM users WHERE email = $1;`, [email])
-
                 let user = new User(selectQuery.rows[0])
                 res(user)
             } catch (err) {
