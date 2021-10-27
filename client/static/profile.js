@@ -40,8 +40,56 @@ logOutBtn.addEventListener('click', (e) => {
     //window.location.assign("<deploy homepage URL>") //MAIN CODE WHEN DB CONNECTS
 })
 
+async function renderHabitPrep()
+{
+  const hName = document.querySelector('#hName').value;
+  const hFrequency = document.querySelector('#hFrequency').value;
+  const freqTarget = document.querySelector('#freqTarget').value;
 
-function  renderHabits() {
+  let postData = {
+    habit_name: hName,
+    frequency: hFrequency,
+    frequency_target: freqTarget
+  }
+
+  console.log(`post data ${postData}`)
+  console.log(`token is in profile ${localStorage.getItem('token')}`)
+  try {
+  let response = await axios.post(`http://localhost:3000/main/habits`, postData, {
+    headers: {
+      'authorization': localStorage.getItem('token')
+    }})
+    renderHabit(response.data)
+  }
+  catch (err)
+  {
+    console.log(`error in habitprep ${err}`)
+
+  }
+
+
+}
+
+async function renderAllHabits()
+{
+  let habits = await axios.get(`http://localhost:3000/main/habit/allhabits`,  
+  {
+    headers: {
+    'authorization': localStorage.getItem('token')
+  }})
+  console.log(`habits is : ${habits}`)
+  for (const habit of habits.data) {
+    console.log("in the loop")
+    renderHabit(habit)
+  }
+}
+
+async function initialise(){
+  renderAllHabits();
+}
+
+async function renderHabit(habit) {
+
   const habitsContainer = document.getElementById('habitsContainer');
   
   //create div for each habit
@@ -53,23 +101,23 @@ function  renderHabits() {
   hNameElement.setAttribute("id", "hNameElement");
 
   const hName = document.querySelector('#hName').value;
-  hNameElement.textContent = `${hName}`;
+  hNameElement.textContent = habit.habit_name;
 
   //add habit frequency
   const hFrequencyElement = document.createElement("h3");
   hFrequencyElement.setAttribute("id", "hFrequencyElement");
 
   const hFrequency = document.querySelector('#hFrequency').value;
-  hFrequencyElement.textContent = `${hFrequency}`;
+  hFrequencyElement.textContent = habit.frequency;
 
   //add frequency target
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  let defaultTrack = 0
+  // let defaultTrack = 0
 
   const freqTarget = document.querySelector('#freqTarget').value;
-  freqTargetElement.textContent = `${defaultTrack} / ${freqTarget}`;
+  freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
@@ -77,15 +125,30 @@ function  renderHabits() {
   fTargetDownElement.setAttribute('id', "fTargetDownElement")
   fTargetDownElement.onclick=decrementButton
 
-  function decrementButton() {
-    var element = document.getElementById('defaultTrack')
-    var value = element.innerHTML;
+  async function decrementButton() {
+    try {
+    let updateButton = await fetch(`http://localhost:3000/main/habit/rfrequency/${habit.id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'authorization': localStorage.getItem('token')
+      }
+    })
+    const updateHabit = await axios.get(`http://localhost:3000/main/habit/${habit.id}`,
+    {
+      headers: {
+        'authorization': localStorage.getItem('token')
+      }
+    })
+    console.log(updateHabit);
+    freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
+    }
+    catch (err)
+    {
+      console.log(err)
+    }
 
-    --value;
-
-    console.log(value);
-    document.getElementById('defaultTrack').innerHTML = value;
-  }
+  } 
 
   //add freqTargetIncrement
   const fTargetUpElement = document.createElement('button');
@@ -93,14 +156,29 @@ function  renderHabits() {
   fTargetUpElement.setAttribute('id', "fTargetUpElement");
   fTargetUpElement.onclick=incrementButton
 
-  function incrementButton() {
-    var element = document.getElementById('defaultTrack')
-    var value = element.innerHTML;
+  async function incrementButton() {
+    try {
+    let updateButton = await fetch(`http://localhost:3000/main/habit/frequency/${habit.id}`,
+    {
+      method: 'PATCH',
+      headers: {
+        'authorization': localStorage.getItem('token')
+      }
+    })
+    const updateHabit = await axios.get(`http://localhost:3000/main/habit/${habit.id}`,
+    {
+      headers: {
+        'authorization': localStorage.getItem('token')
+      }
+    })
+    console.log(updateHabit);
+    freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
+    }
+    catch (err)
+    {
+      console.log(err)
+    }
 
-    ++value;
-
-    console.log(value);
-    document.getElementById('defaultTrack').innerHTML = value;
   }
 
   
@@ -108,16 +186,11 @@ function  renderHabits() {
   const deleteBtnElement = document.createElement('button');
   deleteBtnElement.textContent = 'Remove';
   deleteBtnElement.setAttribute('id', 'deleteBtn');
-  deleteBtnElement.onclick=removeNode
-
-  function removeNode() {
-    const habit = document.getElementById("habitDiv")
-    const parent = habit.parentNode;
-    parent.removeChild(habit);
-    console.log("done");
+  deleteBtnElement.onclick= function (e) { 
+    let parent = this.parentNode;
+    parent.remove()
   }
   
-
 
   
   //insert into DOM
@@ -132,32 +205,10 @@ function  renderHabits() {
 
   const element = document.getElementById("habitsContainer");
   element.insertBefore(habitDiv, element.firstChild);
-
-  //example method for posting all this gathered data to the API
-  //can then fail to append assembled object if server doesnt like it
-  // let postData = {
-  //   habit_name: hName,
-  ////   habit_info: "Going Gym", //redundant/not gathered, possibly trim from db
-  //   frequency: hFrequency,
-  //   frequency_target: freqTarget
-  // }
-
-  // console.log(`token is in profile ${localStorage.getItem('token')}`)
-  //  let response = await fetch(`http://localhost:3000/main/habits`,   {
-  //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'authorization': localStorage.getItem('token')
-  //   },
-  //   body: postData
-  // }
-  // })
-
-
+  
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
 }
 
 
-
-
+initialise()

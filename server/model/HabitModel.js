@@ -9,7 +9,6 @@ class Habit {
 
         this.id = data.id;
         this.habit_name = data.habit_name;
-        this.habit_info = data.habit_info;
         this.frequency = data.frequency;
         this.frequency_track = data.frequency_track;
         this.frequency_target = data.frequency_target;
@@ -50,6 +49,7 @@ class Habit {
             try {
                 let selectQuery = await db.query(`SELECT * FROM Habits WHERE id = $1;`, [id])
                 let habits = new Habit(selectQuery.rows[0])
+                console.log(`findibg by id ${habits}`)
                 res(habits)
             } catch (err) {
                 rej(`failed to retrieve habit: ${err}`)
@@ -62,9 +62,12 @@ class Habit {
             try {
                 let frequency_track = 0;
                 let complete = false;
-                const { habit_name, habit_info, frequency, frequency_target} = habitData
+                const { habit_name,  frequency, frequency_target} = habitData
+                console.log(`habit data ${habitData}`)
+                console.log(`habit name ${habit_name}`)
+                console.log(`user email ${userEmail}`)
                 let user = await User.findByEmail(userEmail)
-                const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
+                const habits = await db.query('INSERT INTO Habits (habit_name, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;', [habit_name, frequency, frequency_track, frequency_target, complete, user.id])
                 const newHabit = new Habit(habits.rows[0]);
                 res(newHabit)
             } catch (err) {
@@ -79,7 +82,8 @@ class Habit {
                 if(this.frequency_track < this.frequency_target){
                     let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`,[this.id])
                     let updateFreq = new Habit(updateQuery.rows[0])
-                    res(updateFreq)
+                    console.log(`update freq is ${JSON.stringify(updateFreq)}`)
+                    res(JSON.stringify(updateFreq))
                 } else {
                     let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`,[this.id])
                     let updateComp = new Habit(comUpdateQuery.rows[0])

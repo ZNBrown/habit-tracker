@@ -24,12 +24,20 @@ async function index(req, res) {
     }
 }
 
-async function create(req, res) {
+async function show(req, res){
     try {
 
-        console.log(req.session.email)
-        const habits = await Habit.create(req.body)
+        let habitId = req.params.id
+        const habits = await Habit.findById(habitId)
         res.status(200).json(habits)
+
+    } catch (err) {
+        res.status(500).json({ err })
+    }
+}
+
+async function create(req, res) {
+    try {
 
         const header = req.headers['authorization'];
         if (header) {
@@ -43,8 +51,8 @@ async function create(req, res) {
                     userEmail = data.email
                 }
             })
-            console.log(userEmail)
-            const habits = await Habit.create(req.body,userEmail)
+            console.log(`req body ${JSON.stringify(req.body)}`)
+            const habits = await Habit.create(req.body, userEmail)
             res.status(200).json(habits)
         }
 
@@ -98,4 +106,4 @@ async function destroy (req, res) {
 }
 
 
-module.exports = { index, create, destroy, updatefreq, updateComp, reduceFreq}
+module.exports = { index, show, create, destroy, updatefreq, updateComp, reduceFreq}
