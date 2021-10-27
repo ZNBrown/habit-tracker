@@ -8,6 +8,7 @@ describe('Habit', () => {
     beforeEach(() => jest.clearAllMocks())
 
     afterAll(() => jest.resetAllMocks())
+
     //  test for all 
 
     describe('all', () => {
@@ -21,19 +22,34 @@ describe('Habit', () => {
 
     //  test to getHabitByUserId
 
-    describe('findByHabitId', () => {
+    describe('getHabitByUserId', () => {
         test('habit  on successful db query', async () => {
-            let habitData = {habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 1, 
-            frequency_target: 2, complete: false, user_id: 1}
+            let habitData = {
+                habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 1,
+                frequency_target: 2, complete: false, user_id: 1
+            }
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({rows: [ habitData] });
+                .mockResolvedValueOnce({ rows: [habitData] });
             const result = await Habit.getHabitByUserId(1);
-            expect(result).toBeInstanceOf(Habit)
+            expect(result).toBeInstanceOf(Array)
         })
+
     });
-// i need to finish this sets
+
     // test to findById
 
+    describe('findById', () => {
+        test('it resolves with habits of user on successful db query', async () => {
+            let habitData = {
+                habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 1,
+                frequency_target: 2, complete: false, user_id: 1}
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [habitData] });
+            const result = await Habit.findById(1);
+            expect(result).toBeInstanceOf(Habit)
+
+        })
+    });
     // test to create a new habit
 
     //test to updateFrequencyTrack
@@ -44,11 +60,11 @@ describe('Habit', () => {
 
     // test to delete
 
-//     INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id)
-// VALUES
-//     ('testing', 'testing water', 'daily', 4, 7, false, 1),
-//     ('test Drinking','test Drinking water','hours', 4, 5, false, 2),
-//     ('test gym','test Drinking gym','hours', 2, 3, false, 3);
+    //     INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id)
+    // VALUES
+    //     ('testing', 'testing water', 'daily', 4, 7, false, 1),
+    //     ('test Drinking','test Drinking water','hours', 4, 5, false, 2),
+    //     ('test gym','test Drinking gym','hours', 2, 3, false, 3);
 
 
 
