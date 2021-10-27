@@ -71,7 +71,6 @@ function  renderHabits() {
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${defaultTrack} / ${freqTarget}`;
 
-  
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
   fTargetDownElement.textContent = '-';
@@ -119,6 +118,7 @@ function  renderHabits() {
   }
   
 
+
   
   //insert into DOM
   habitDiv.appendChild(hNameElement);
@@ -133,7 +133,31 @@ function  renderHabits() {
   const element = document.getElementById("habitsContainer");
   element.insertBefore(habitDiv, element.firstChild);
 
+  //example method for posting all this gathered data to the API
+  //can then fail to append assembled object if server doesnt like it
+  // let postData = {
+  //   habit_name: hName,
+  ////   habit_info: "Going Gym", //redundant/not gathered, possibly trim from db
+  //   frequency: hFrequency,
+  //   frequency_target: freqTarget
+  // }
+
+  // console.log(`token is in profile ${localStorage.getItem('token')}`)
+  //  let response = await fetch(`http://localhost:3000/main/habits`,   {
+  //   method: 'POST', // *GET, POST, PUT, DELETE, etc.
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     'authorization': localStorage.getItem('token')
+  //   },
+  //   body: postData
+  // }
+  // })
+
+
   const closeModal = document.querySelector('.habit-modal')
   closeModal.classList.add('hidden')
 }
+
+
+
 
