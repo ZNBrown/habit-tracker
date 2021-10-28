@@ -1,11 +1,10 @@
 //Dyname Welcome <user>
-function welcomeUser(e) {
-  //e.preventDefault();
-	const welcomeMessage = document.getElementById('welcomeUser');
-	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
+function welcomeUser() {
+  const username = localStorage.getItem("username");
+	const welcomeMessage = document.querySelector('#welcomeUser');
+  document.title = `${username}'s TrackIt`;
+	welcomeMessage.textContent = `Welcome, ${username}`; 
 }
-
-
 
 //add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
@@ -13,7 +12,7 @@ const addHabit = document.getElementById('addhabit');
 addHabit.addEventListener('click', showAddHabitForm);
 
 function showAddHabitForm(e) {
-  e.preventDefault();
+  //e.preventDefault();
   const habitModal = document.querySelector('.habit-modal');
 	habitModal.classList.remove('hidden');
 }
@@ -87,6 +86,7 @@ async function renderAllHabits()
 
 async function initialise(){
   renderAllHabits();
+  welcomeUser();
 }
 async function showTime(habit)
 {
@@ -259,3 +259,6 @@ async function renderHabit(habit) {
 
 
 initialise()
+
+
+module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
