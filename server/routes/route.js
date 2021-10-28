@@ -21,6 +21,7 @@ router.delete('/habit/:id', verifyToken, habitController.destroy)
 router.patch('/habit/complete/:id', verifyToken,habitController.updateComp)
 router.patch('/habit/frequency/:id', verifyToken,habitController.updatefreq)
 router.patch('/habit/rfrequency/:id', verifyToken,habitController.reduceFreq)
+router.post('/streak', verifyToken, habitController.createStreak)
 
 
 
