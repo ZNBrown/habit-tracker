@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/styleprofile.css">
     <link rel="icon" href="https://flaticons.net/icon.php?slug_category=user-interface&slug_icon=checkbox">
-    <title>HTracker</title>
+    <title>TrackIt</title>
     <link rel="stylesheet" href="static/style-form.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 </head>
@@ -18,7 +18,7 @@
         </div>
 
         <div>
-            <h1 id="welcome">HTRACKER</h1>
+            <h1 id="welcome">TrackIt</h1>
         </div>
 
         <div id="logoutarea">
@@ -29,7 +29,7 @@
     <div class="profilearea">        
         <div id="profile">
 
-            <p id="welcomeUser"></p>
+            <h1 id="welcomeUser"></h1>
 
             <button id="addhabit">add habit</button>
 
@@ -42,37 +42,6 @@
         <!--habitContainer created in profile.js-->
     </div>
 
-    <!--<main>
-
-        <div class="habits">  
-
-            <div id="habitdet">
-
-                <div id="one">
-                
-                    <div id="exercise"></div>
-
-                </div>
-
-                <div id="two">
-                
-                    <div id="frequency"></div>
-
-                </div>
-
-                <div id="three">
-
-                    <div id="pie"></div> 
-                    
-                    <div id="tick"></div>
-
-                    <div id="delete"></div>
-
-                </div>           
-                
-            </div>
-        </div>
-    </main>-->
     <div id="habitModal"class="habit-modal hidden">
         <div class="popup-modal">
             <i id="closeHabit" class="fas fa-times"></i>
@@ -87,14 +56,17 @@
                     <option value="Monthly">Monthly</option>
                 </select>
                 <label for="freqTarget">Frequency target:</label>
-                <input name="freqTarget" type="number" id="freqTarget" placeholder="2" min="1" max="5" required>
-                <input onclick="renderHabits()" type="button" id="submitHabit" value="Add habit">
+                <input name="freqTarget" type="number" id="freqTarget" placeholder="2" min="1" max="10" required>
+                <input onclick="renderHabitPrep()" type="button" id="submitHabit" value="Add habit">
             </form>
         </div>
     </div>
     <footer>
         <p>Hamsa, Henry, Zach, Zain & Zerh</p>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datejs/1.0/date.min.js" integrity="sha512-/n/dTQBO8lHzqqgAQvy0ukBQ0qLmGzxKhn8xKrz4cn7XJkZzy+fAtzjnOQd5w55h4k1kUC+8oIe6WmrGUYwODA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script defer src="static/profile.js"></script>
+
 </body>
 </html>
