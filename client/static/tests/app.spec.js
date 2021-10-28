@@ -1,13 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const html = fs.readFileSync(path.resolve(__dirname, '../../profile.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, '../../index.html'), 'utf8');
 let myFuns;
-
 
 describe('head testing', () => {
     beforeEach(() => {
         document.documentElement.innerHTML = html.toString();
-        myFuns = require('../profile')
+        myFuns = require('../app')
     });
 
     test('the title has been changed from the default', () => {
@@ -45,49 +44,23 @@ describe('head testing', () => {
 		expect(src).toBeTruthy();
 	});
 
-    test('script link is connected to axios', () => {
-        let axLink = document.querySelector('script');
-        let srcx = axLink.getAttribute('srcx');
-        expect(srcx).toBeFalsy();;
-    });
-
+    test('script link is a connected to request.js and app.js', () => {
+		let jsLink = document.querySelector('script');
+		let src = jsLink.getAttribute('src');
+        expect(src).toBe('static/requests.js');
+	});
 
 })
 
-
-describe('upper body test', () => {
-    beforeAll(() => {
+describe('body testing in index.html', () => {
+    beforeEach(() => {
         document.documentElement.innerHTML = html.toString();
-        myFuns = require('../profile');
     });
 
-    test('header title has "Welcome"', () => {
-        const welcomeMessage = document.querySelector("#welcomeUser");
-        expect(welcomeMessage.textContent).toContain("");
-        expect(welcomeMessage.textContent).not.toEqual('Document');
+    test('clicking signup moves the styles', () => {
+        const loginForm = document.querySelector("form.login");
+        const loginText = document.querySelector(".title-text .login");
+        expect(loginForm.style.marginLeft).toBeFalsy();
+        expect(loginText.style.marginLeft).toBeFalsy();
     });
-
-
-    test('add new habit displays habit-modal', () => {
-        myFuns.showAddHabitForm();
-        const habitModal = document.querySelector('.habit-modal')
-        expect(habitModal).classList.not.toContain("hidden");
-    });
-
-    test('close button in habit modal form closes', () => {
-        myFuns.closeHabitForm();
-        const closeModal = document.querySelector('.habit-modal')
-        expect(closeModal.classList).toContain({});
-    });
-
-
-});
-
-describe('body render', () => {
-    beforeAll(() => {
-        document.documentElement.innerHTML = html.toString();
-        myFuns = require('../profile');
-    });
-
-    
 })
