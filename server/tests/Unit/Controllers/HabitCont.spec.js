@@ -59,42 +59,6 @@ describe('habits controller', () => {
     });
 
 
-
-
-    // // test for updatefreq
-
-    // describe('updatefreq', () => {
-    //     test('it returns an update habit completed  with a 200 status code', async () => {
-    //         let habitData = {
-    //             habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 2,
-    //             frequency_target: 2, complete: true, user_id: 1, id: 1
-    //         };
-    //         let userData = { username: 'testUser', password: 'testPassword', email: 'testEmail' };
-
-    //         jest.spyOn(Habit.prototype, 'updateFrequencyTrack')
-    //             .mockResolvedValue(new Habit(habitData));
-    //         const mockReq = { body: { id: 1, ...habitData, ...userData } }
-    //         await HabitController.updatefreq(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(500);
-    //     })
-    // });
-
-    // // test for reduceFreq
-
-    // describe('updateComp', () => {
-    //     test('it returns an update habit completed  with a 200 status code', async () => {
-    //         let habitData = {
-    //             habit_name: "Gym", habit_info: "Going to Gym", frequency: "Daily", frequency_track: 2,
-    //             frequency_target: 2, complete: true, user_id: 1
-    //         };
-    //         jest.spyOn(Habit.prototype, 'updateComplete')
-    //             .mockResolvedValue(new Habit(habitData));
-    //         const mockReq = { id: 1 }
-    //         await HabitController.updateComp(mockReq, mockRes);
-    //         expect(mockStatus).toHaveBeenCalledWith(500);
-    //     })
-    // });
-
     // test for updateComp
     describe('updateComp', () => {
         test('it returns an update habit completed  with a 200 status code', async () => {
@@ -107,6 +71,39 @@ describe('habits controller', () => {
             const mockReq = { params: { id: 1 } }
             await HabitController.updateComp(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(200);
+        })
+    });
+
+    // // test for updatefreq
+
+    describe('updatefreq', () => {
+        test('it returns an update habit completed  with a 200 status code', async () => {
+            let habitData = {
+                habit_name: "Gym", frequency: "Daily", frequency_track: 3,
+                frequency_target: 6, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
+            };
+
+            jest.spyOn(Habit, 'findById')
+                .mockResolvedValue(new Habit(habitData));
+            const mockReq = { params: { id: 1 } }
+            await HabitController.updatefreq(mockReq, mockRes)
+            expect(mockStatus).toHaveBeenCalledWith(404);
+        })
+    });
+
+    // // test for reduceFreq
+
+    describe('reduceFreq', () => {
+        test('it returns an update habit completed with a 200 status code', async () => {
+            let habitData = {
+                habit_name: "Gym", frequency: "Daily", frequency_track: 3,
+                frequency_target: 6, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
+            };
+            jest.spyOn(Habit, 'findById')
+                .mockResolvedValue(new Habit(habitData));
+            const mockReq = { params: { id: 1 } }
+            await HabitController.reduceFreq(mockReq, mockRes);
+            expect(mockStatus).toHaveBeenCalledWith(404);
         })
     });
 
