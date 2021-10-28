@@ -58,35 +58,28 @@ class Habit {
     static create(habitData, userEmail) {
         return new Promise(async (res, rej) => {
             try {
-                    let frequency_track = 0;
-                    let complete = "false";
-                    const { habit_name, frequency, frequency_target} = habitData
-                    let now = Date.now()
-                    let deadline = await convert(frequency) + now
-                    console.log(`habit data ${habitData}`)
-                    console.log(`habit name ${habit_name}`)
-                    console.log(`user email ${userEmail}`)
-                    console.log(`frequency ${frequency}`)
-                    console.log(`target ${frequency_target}`)
-                    console.log(`track ${frequency_track}`)
-                    console.log(`deadline ${deadline}`)
-                    let user = await User.findByEmail(userEmail)
-                    const habits = await db.query('INSERT INTO Habits (habit_name, frequency, frequency_track, frequency_target, deadline, time_created,complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;', [habit_name, frequency, frequency_track, frequency_target, deadline, now, complete, user.id])
-                    const newHabit = new Habit(habits.rows[0]);
-                    res(newHabit)
+                let frequency_track = 0;
+                let complete = "false";
+                const { habit_name, frequency, frequency_target } = habitData
+                let now = Date.now()
+                let deadline = await convert(frequency) + now
+                let user = await User.findByEmail(userEmail)
+                const habits = await db.query('INSERT INTO Habits (habit_name, frequency, frequency_track, frequency_target, deadline, time_created,complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;', [habit_name, frequency, frequency_track, frequency_target, deadline, now, complete, user.id])
+                const newHabit = new Habit(habits.rows[0]);
+                res(newHabit)
             } catch (err) {
                 rej(`Failed to create Habit ${err}`)
             }
         })
     }
 
-    updateTime(){
+    updateTime() {
         return new Promise(async (res, rej) => {
             try {
                 let now = Date.now()
-                if (now >= this.deadline && this.complete == "false"){
+                if (now >= this.deadline && this.complete == "false") {
                     let complete = "fail"
-                    let updateQuery = await db.query(`UPDATE Habits SET complete = $1 WHERE id = $2 RETURNING *;`,[complete,this.id])
+                    let updateQuery = await db.query(`UPDATE Habits SET complete = $1 WHERE id = $2 RETURNING *;`, [complete, this.id])
                     let updateComplete = new Habit(updateQuery.rows[0])
                     res(updateComplete)
                 } else {
@@ -105,8 +98,7 @@ class Habit {
                 if (this.frequency_track < this.frequency_target) {
                     let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`, [this.id])
                     let updateFreq = new Habit(updateQuery.rows[0])
-                    console.log(`update freq is ${JSON.stringify(updateFreq)}`)
-                    res(JSON.stringify(updateFreq))
+                    res(updateFreq)
                 } else {
                     let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`, [this.id])
                     let updateComp = new Habit(comUpdateQuery.rows[0])
@@ -168,26 +160,24 @@ class Habit {
 
 async function convert(frequency) {
     let date = new Date();
-    if (frequency == "Daily"){
+    if (frequency == "Daily") {
         let currentTime = date.getHours()
-        console.log('it is in daily')
-        let remainingTimeHours  = 24 - currentTime
+        let remainingTimeHours = 24 - currentTime
         let remainingTime = remainingTimeHours * 3600000
-        console.log(remainingTime)
         return remainingTime
-    } else if (frequency == "Weekly"){
+    } else if (frequency == "Weekly") {
         let currentWeekDay = date.getDay()
         let currentDayInHours = currentWeekDay * 24
-        let remainingTimeHours  = 168 - currentDayInHours
+        let remainingTimeHours = 168 - currentDayInHours
         let remainingTime = remainingTimeHours * 3600000
         return remainingTime
-    } else if (frequency == "Monthly"){
+    } else if (frequency == "Monthly") {
         let currentMonthDay = date.getDate()
         let currentDayInHour = currentMonthDay * 24
-        let remainingTimeHours  = 730 - currentDayInHour
+        let remainingTimeHours = 730 - currentDayInHour
         let remainingTime = remainingTimeHours * 3600000
         return remainingTime
-    }else{
+    } else {
         console.log('no where')
     }
 }
