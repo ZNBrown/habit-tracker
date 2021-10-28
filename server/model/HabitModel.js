@@ -23,7 +23,7 @@ class Habit {
                 res(habits)
 
             } catch (err) {
-                rej(`Error fetching habits, err: ${err}`)
+                rej(`lsError fetching habits, err: ${err}`)
             }
 
         })

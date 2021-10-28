@@ -110,7 +110,7 @@ async function showTime(habit)
 
   (days || hours || minutes) && timeTemp.push(' and ' + minutes + ' minutes');
   timeTemp.join(' ');
-  return `You have ${timeTemp} left`
+  return `You have ${timeTemp} left to complete this habit`
 }
 
 async function renderHabit(habit) {
@@ -142,10 +142,22 @@ async function renderHabit(habit) {
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  // let defaultTrack = 0
-
+  
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
+
+  if(habit.frequency_track === habit.frequency_target) {
+    console.log("hi");
+    let parent = this.parentNode;
+    console.log(parent);
+    
+    parent.style.backgroundColor = 'green';
+  }
+  //show time element
+  const showTimeElement = document.createElement("p");
+  showTimeElement.setAttribute("id", "showTimeElement");
+
+  showTimeElement.textContent = await showTime(habit);
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
@@ -201,6 +213,14 @@ async function renderHabit(habit) {
     })
     console.log(updateHabit);
     freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
+    
+    if(updateHabit.data.frequency_track === updateHabit.data.frequency_target) {
+      console.log("hi");
+      let parent = this.parentNode;
+      console.log(parent);
+      
+      parent.style.backgroundColor = 'green';
+    }
     }
     catch (err)
     {
@@ -237,7 +257,8 @@ async function renderHabit(habit) {
   //insert into DOM
   habitDiv.appendChild(hNameElement);
   habitDiv.appendChild(hFrequencyElement);
-  habitDiv.appendChild(freqTargetElement);
+  habitDiv.appendChild(freqTargetElement)
+  habitDiv.appendChild(showTimeElement);
   habitDiv.appendChild(fTargetDownElement);
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
@@ -261,4 +282,4 @@ async function renderHabit(habit) {
 initialise()
 
 
-module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
+//module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
