@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.46% </span>
+                <span class="strong">34.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/26</span>
+                <span class='fraction'>9/26</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40% </span>
+                <span class="strong">36% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/25</span>
+                <span class='fraction'>9/25</span>
             </div>
         
             
@@ -112,40 +112,40 @@
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,19 +158,19 @@ require('dotenv').config();
 &nbsp;
 const User = require('../model/UserModel')
 &nbsp;
-async function create(req, res) {
-    try {
-        const salt = await bcrypt.genSalt();
-        const hashedPass = await bcrypt.hash(req.body.password, salt)
-        await User.create({ ...req.body, password: hashedPass })
+async function <span class="fstat-no" title="function not covered" >create(</span>req, res) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+        const salt = <span class="cstat-no" title="statement not covered" >await bcrypt.genSalt();</span>
+        const hashedPass = <span class="cstat-no" title="statement not covered" >await bcrypt.hash(req.body.password, salt)</span>
+<span class="cstat-no" title="statement not covered" >        await User.create({ ...req.body, password: hashedPass })</span>
 <span class="cstat-no" title="statement not covered" >        res.status(201).json({ msg: 'User created' })</span>
     } catch (err) {
-        res.status(500).json(err)
+<span class="cstat-no" title="statement not covered" >        res.status(500).json(err)</span>
     }
 }
-async function <span class="fstat-no" title="function not covered" >login(</span>req, res) {
-<span class="cstat-no" title="statement not covered" >    try {</span>
-        const user = <span class="cstat-no" title="statement not covered" >await User.findByEmail(req.body.email)</span>
+async function login(req, res) {
+    try {
+        const user = await User.findByEmail(req.body.email)
 <span class="cstat-no" title="statement not covered" >        if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >            throw new Error('No user with this email')</span>
         }
@@ -191,8 +191,8 @@ async function <span class="fstat-no" title="function not covered" >login(</span
 <span class="cstat-no" title="statement not covered" >            throw new Error('User failed to authenticate')</span>
         }
     } catch (err) {
-<span class="cstat-no" title="statement not covered" >        console.log(err)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(401).json({ err })</span>
+        console.log(err)
+        res.status(401).json({ err })
     }
 }
 &nbsp;
@@ -205,7 +205,7 @@ module.exports = { create, login }</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Oct 28 2021 17:43:44 GMT+0000 (Coordinated Universal Time)
+                at Thu Oct 28 2021 18:01:08 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
