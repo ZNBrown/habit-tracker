@@ -66,7 +66,9 @@ class Habit {
                 let user = await User.findByEmail(userEmail)
                 const habits = await db.query('INSERT INTO Habits (habit_name, frequency, frequency_track, frequency_target, deadline, time_created,complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;', [habit_name, frequency, frequency_track, frequency_target, deadline, now, complete, user.id])
                 const newHabit = new Habit(habits.rows[0]);
+                console.log(newHabit)
                 res(newHabit)
+
             } catch (err) {
                 rej(`Failed to create Habit ${err}`)
             }
