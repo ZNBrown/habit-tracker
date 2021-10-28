@@ -1,4 +1,5 @@
 node_modules
 */coverage
 coverage
-*/node_modulesg
+*/node_modules
+*/coverage
