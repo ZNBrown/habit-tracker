@@ -73,6 +73,16 @@ async function createStreak(req, res) {
     }
 }
 
+async function createTest(req, res) {
+    try {
+        let userEmail;
+        const habits = await Habit.create(req.body, userEmail)
+        res.status(200).json(habits)
+    } catch (err) {
+        res.status(500).json({ err })
+    }
+}
+
 async function show(req, res) {
     try {
         let habitId = req.params.id
@@ -157,4 +167,4 @@ async function destroy(req, res) {
 }
 
 
-module.exports = { index, indextest,show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak}
+module.exports = { index, indextest, createTest, show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak}
