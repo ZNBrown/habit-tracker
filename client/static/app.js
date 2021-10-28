@@ -55,7 +55,24 @@ async function signupHelper(e) {
   console.log(postData)
   try{
     const newUser = await axios.post(`http://localhost:3000/main/register`, postData);
-    console.log(newUser.data);
+    try{
+      const loginData = {
+        email: postData.email,
+        password: postData.password
+      }
+      const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
+      userData = JSON.parse(atob(newUser.data.token.split(' ')[1].split('.')[1]))
+      localStorage.setItem('token', newUser.data.token);
+      localStorage.setItem('username', userData.username)
+      localStorage.setItem('email', userData.email)
+      localStorage.setItem('id', userData.id)
+      window.location.href = "profile.html";
+    }
+    catch
+    {
+      console.log("Failed to log in post register")
+    }
+
   }
   catch (err)
   {
