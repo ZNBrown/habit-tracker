@@ -81,7 +81,6 @@ class Habit {
                     let complete = "fail"
                     let updateQuery = await db.query(`UPDATE Habits SET complete = $1 WHERE id = $2 RETURNING *;`, [complete, this.id])
                     let updateComplete = new Habit(updateQuery.rows[0])
-                    console.log(updateComplete)
                     res(updateComplete)
                 } else {
                     res("You still have time to complete the habit")
@@ -166,7 +165,7 @@ async function convert(frequency) {
         console.log('it is in daily')
         let remainingTimeHours = 24 - currentTime
         let remainingTime = remainingTimeHours * 3600000
-        // console.log(remainingTime)
+        console.log(remainingTime)
         return remainingTime
     } else if (frequency == "Weekly") {
         let currentWeekDay = date.getDay()
