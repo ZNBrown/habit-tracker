@@ -1,6 +1,6 @@
 services:
   api:
-    container_name: habit_test_api
+    container_name: habit_tracker_test
     environment: 
       - PGUSER=getbaked
       - PGHOST=db
@@ -12,7 +12,7 @@ services:
       - db
     tty: true
   db:
-    container_name: habit_test_db
+    container_name: hobbit_test_db
     volumes:
       - "test_db:/var/lib/postgresql/data"
     environment: 
