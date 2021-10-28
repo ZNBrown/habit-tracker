@@ -124,10 +124,20 @@ async function showTime(habit)
   }
   else if (habit.frequency === "Weekly")
   {
-    let daysUntilEnd = 6 - dayjs().day()
-    console.log("daystillEnd")
-    console.log(daysUntilEnd)
-    deadline = dayjs().day(daysUntilEnd).hour(0).minute(0).second(0)
+    let today = dayjs().day()
+    deadline = dayjs().day(6).hour(23).minute(59).second(59)
+    console.log("deadline")
+    console.log(deadline)
+    console.log(dayjs().to(deadline))
+    return(dayjs().to(deadline))
+  }
+  else if (habit.frequency === "Monthly")
+  {
+    let today = dayjs().day()
+    deadline = dayjs().date(31).hour(23).minute(59).second(59)
+    console.log("deadline")
+    console.log(deadline)
+    console.log(dayjs().to(deadline))
     return(dayjs().to(deadline))
   }
 }
@@ -189,6 +199,10 @@ async function renderHabit(habit) {
   fTargetDownElement.onclick=decrementButton
 
   async function decrementButton() {
+    if (habit.complete == "true")
+    {
+      return "Already completed"
+    }
     try {
     let updateButton = await fetch(`http://localhost:3000/main/habit/rfrequency/${habit.id}`,
     {
