@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTracker</title>
+    <link rel="icon" href="https://flaticons.net/icon.php?slug_category=user-interface&slug_icon=checkbox">
+    <title>TrackIt</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
     <div>
-        <h1>HTracker</h1>
+        <h1><img id="logo" src="https://flaticons.net/icon.php?slug_category=user-interface&slug_icon=checkbox" alt="logo"></img>TrackIt</h1>
         <h2>Habit Tracker app</h2>
     </div>
     <div class="wrapper">
@@ -27,7 +29,7 @@
             <div class="slider-tab"></div>
           </div>
           <div class="form-inner">
-            <form action="#" class="login">
+            <form id="login-form"action="#" class="login">
               <div class="field">
                 <input type="text" placeholder="Email Address" required>
               </div>
@@ -41,7 +43,7 @@
               </div>
               <div class="signup-link">Not a member? <a href="">Register today</a></div>
             </form>
-            <form action="#" class="signup">
+            <form id="signup-form"action="#" class="signup">
               <div class="field">
                 <input type="text" placeholder="Username" required>
               </div>
@@ -62,7 +64,12 @@
     <footer>
         <p>Hamsa, Henry, Zach, Zain & Zerh</p>
     </footer>
+    <script src="static/requests.js"></script>
     <script src="static/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.7/dayjs.min.js" integrity="sha512-bwD3VD/j6ypSSnyjuaURidZksoVx3L1RPvTkleC48SbHCZsemT3VKMD39KknPnH728LLXVMTisESIBOAb5/W0Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
     
 </body>
 </html>
