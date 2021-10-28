@@ -3,9 +3,10 @@ const jwt = require("jsonwebtoken");
 
 async function index(req, res) {
     try {
+        let userId;
+
         const header = req.headers['authorization'];
         if (header) {
-            let userId;
             const token = header.split(' ')[1]
             jwt.verify(token, process.env.SECRET, async (err, data) => {
                 if (err) {
@@ -15,16 +16,26 @@ async function index(req, res) {
                     userId = data.id
                 }
             })
-            const habits = await Habit.getHabitByUserId(userId)
-            res.status(200).json(habits)
         }
 
+        const habits = await Habit.getHabitByUserId(userId)
+        res.status(200).json(habits)
     } catch (err) {
         res.status(500).json({ err })
     }
 }
 
-async function createStreak (req, res) {
+async function indextest(req, res) {
+    try {
+        let userId = 1;
+        const habits = await Habit.getHabitByUserId(userId)
+        res.status(200).json(habits)
+
+    } catch (err) {
+        res.status(500).json({ err })
+    }
+}
+async function createStreak(req, res) {
     console.log('ourside the try')
     try {
         const header = req.headers['authorization'];
@@ -45,24 +56,24 @@ async function createStreak (req, res) {
             console.log(userId)
             const habits = await Habit.getHabitByUserId(userId)
             let completeArr = []
-        for(let i = 0; i < habits.length; i++){
-            if (habits[i].complete == "true"){
-                let completed = habits[i].complete
-                completeArr.push(completed)
-            } else {
-                console.log('habit not completed')
+            for (let i = 0; i < habits.length; i++) {
+                if (habits[i].complete == "true") {
+                    let completed = habits[i].complete
+                    completeArr.push(completed)
+                } else {
+                    console.log('habit not completed')
+                }
             }
-        }
-        console.log(completeArr)
-        res.status(200).json(completeArr)
+            console.log(completeArr)
+            res.status(200).json(completeArr)
         }
     } catch (err) {
         console.log(err)
-        res.status(500).json({err})
+        res.status(500).json({ err })
     }
 }
 
-async function show(req, res){
+async function show(req, res) {
     try {
         let habitId = req.params.id
         const habits = await Habit.findById(habitId)
@@ -88,7 +99,7 @@ async function create(req, res) {
                     userEmail = data.email
                 }
             })
-          
+
             console.log(`req body ${JSON.stringify(req.body)}`)
 
             const habits = await Habit.create(req.body, userEmail)
@@ -112,7 +123,7 @@ async function updateComp(req, res) {
 }
 
 
-async function updatefreq (req, res){
+async function updatefreq(req, res) {
 
     try {
         const habit = await Habit.findById(req.params.id)
@@ -146,4 +157,5 @@ async function destroy(req, res) {
 }
 
 
-module.exports = { index, show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak}
+module.exports = { index, indextest, show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak }
+

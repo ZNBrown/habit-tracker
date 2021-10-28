@@ -6,7 +6,7 @@ const app = require('../../server');
 const testSeed = fs.readFileSync(__dirname + '/test_seeds.sql').toString();
 
 const resetTestDB = () => {
-    return new Promise (async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         try {
             const db = new Pool()
             await db.query(testSeed);
@@ -21,3 +21,4 @@ global.request = request;
 global.app = app;
 global.resetTestDB = resetTestDB;
 global.port = process.env.PORT || 5000;
+
