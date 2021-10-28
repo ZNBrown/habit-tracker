@@ -157,5 +157,4 @@ async function destroy(req, res) {
 }
 
 
-module.exports = { index, indextest, show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak }
-
+module.exports = { index, indextest,show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak}
