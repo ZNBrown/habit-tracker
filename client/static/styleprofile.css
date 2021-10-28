@@ -261,7 +261,7 @@ footer {
         margin: 20px;
         display: block;
         background-color: white;
-        width: 340px;
+        width: 320px;
         height: auto;
         border-radius: 10px;
         box-shadow: 1px 1px 4px white;
@@ -289,7 +289,7 @@ footer {
     }
 
     #deleteBtn {
-        width: 12%;
+        width: 30px;
         border-radius: 5px;
         border-style: none;
         cursor: pointer;
@@ -298,7 +298,7 @@ footer {
         font-size: 10px;
         font-family: 'Poppins', sans-serif;
         float: right;
-        margin-right: 8px;
+        margin-right: 25px;
         height: 12%;
         margin-top: 3px;
     }
@@ -311,7 +311,7 @@ footer {
         text-align: center;
         background-color: rgb(23, 34, 5);
         box-shadow: 1px 1px 4px rgb(184, 184, 184);
-        margin-left: 2%;
+        margin-left: 4%;
         margin-bottom: 15px;
         height: 10%;
         cursor: pointer;
@@ -322,7 +322,7 @@ footer {
         border: 1px solid darkblue;
         color: white;
         font-size: 12px;
-        margin-left: 34%;
+        margin-left: 36%;
         background-color: rgb(46, 1, 1);
         box-shadow: 1px 1px 4px rgb(184, 184, 184);
         margin-bottom: 15px;

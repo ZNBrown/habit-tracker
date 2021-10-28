@@ -32,6 +32,8 @@ loginForm.addEventListener('submit', async (e) => {
     console.log(postData)
     const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
     console.log(newUser.data.token);
+    localStorage.setItem('username', newUser.data.username)
+    localStorage.setItem('username', newUser.data.email)
     localStorage.setItem('token', newUser.data.token);
     window.location.href = "profile.html";
 

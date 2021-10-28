@@ -2,8 +2,8 @@
 function welcomeUser() {
   const username = localStorage.getItem("username");
 	const welcomeMessage = document.querySelector('#welcomeUser');
-  document.title = `${username}'s Habits`;
-	welcomeMessage.textContent = ` ${username}`; //TO BE TESTED ONCE DB IS CONNECTED
+  document.title = `${username}'s TrackIt`;
+	welcomeMessage.textContent = ` ${username}`; 
 }
 
 //add habit button opens pop-up form
