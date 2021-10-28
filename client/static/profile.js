@@ -90,27 +90,56 @@ async function initialise(){
 }
 async function showTime(habit)
 {
-  const dateObject = new Date(habit.deadline * 1)
-  let nowTime = new Date()
-  let betweenTime = dateObject - nowTime;
+
+  //const dateObject = new Date(habit.deadline * 1)
+  // console.log("LOOK HERE")
+  // console.log(habit.deadline)
+  // console.log(dateObject);
+  // let nowTime = new Date()
+  // let betweenTime = dateObject - nowTime;
 
 
-  const days = Math.floor(betweenTime / (1000 * 60 * 60 * 24)); 
-  betweenTime -= days * 1000 * 60 * 60 * 24
-  const hours = Math.floor(betweenTime / (1000 * 60 * 60)); 
-  betweenTime -= hours * 1000 * 60 * 60
-  const minutes = Math.floor(betweenTime / (1000 * 60)); 
-  betweenTime -= minutes * 1000 * 60
+  // // const days = Math.floor(betweenTime / (1000 * 60 * 60 * 24)); 
+  // // betweenTime -= days * 1000 * 60 * 60 * 24
+  // // const hours = Math.floor(betweenTime / (1000 * 60 * 60)); 
+  // // betweenTime -= hours * 1000 * 60 * 60
+  // // const minutes = Math.floor(betweenTime / (1000 * 60)); 
+  // // betweenTime -= minutes * 1000 * 60
 
-  const timeTemp = [];
+  // // const timeTemp = [];
 
-  (days) && timeTemp.push(days + ' days');
+  // // (days) && timeTemp.push(days + ' days');
 
-  (days || hours) && timeTemp.push(' ' + hours + ' hours');
+  // // (days || hours) && timeTemp.push(' ' + hours + ' hours');
 
-  (days || hours || minutes) && timeTemp.push(' and ' + minutes + ' minutes');
-  timeTemp.join(' ');
-  return `You have ${timeTemp} left to complete this habit`
+  // // (days || hours || minutes) && timeTemp.push(' and ' + minutes + ' minutes');
+  // // timeTemp.join(' ');
+  // //return `You have ${timeTemp} left to complete this habit`
+  let deadline;
+  if (habit.frequency === "Daily")
+  {
+    let tomorrow = dayjs().day() + 1
+    deadline = dayjs().day(tomorrow).hour(0).minute(0).second(0)
+    return(dayjs().to(deadline))
+  }
+  else if (habit.frequency === "Weekly")
+  {
+    let today = dayjs().day()
+    deadline = dayjs().day(6).hour(23).minute(59).second(59)
+    console.log("deadline")
+    console.log(deadline)
+    console.log(dayjs().to(deadline))
+    return(dayjs().to(deadline))
+  }
+  else if (habit.frequency === "Monthly")
+  {
+    let today = dayjs().day()
+    deadline = dayjs().date(31).hour(23).minute(59).second(59)
+    console.log("deadline")
+    console.log(deadline)
+    console.log(dayjs().to(deadline))
+    return(dayjs().to(deadline))
+  }
 }
 
 async function renderHabit(habit) {
@@ -142,11 +171,21 @@ async function renderHabit(habit) {
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  // let defaultTrack = 0
-
+  
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
+  console.log(habit)
+  if (habit.complete == "true")
+  {
+    habitDiv.style.backgroundColor = 'green';
 
+  }
+  else if  (habit.complete == "failed")
+  {
+    habitDiv.style.backgroundColor = 'red';
+  }
+
+ 
   //show time element
   const showTimeElement = document.createElement("p");
   showTimeElement.setAttribute("id", "showTimeElement");
@@ -160,6 +199,10 @@ async function renderHabit(habit) {
   fTargetDownElement.onclick=decrementButton
 
   async function decrementButton() {
+    if (habit.complete == "true")
+    {
+      return "Already completed"
+    }
     try {
     let updateButton = await fetch(`http://localhost:3000/main/habit/rfrequency/${habit.id}`,
     {
@@ -207,6 +250,18 @@ async function renderHabit(habit) {
     })
     console.log(updateHabit);
     freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
+    
+    if(updateHabit.data.frequency_track === updateHabit.data.frequency_target) {
+      let updateButton = await fetch(`http://localhost:3000/main/habit/frequency/${habit.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'authorization': localStorage.getItem('token')
+        }
+      })
+      let parent = this.parentNode;      
+      parent.style.backgroundColor = 'green';
+    }
     }
     catch (err)
     {
@@ -267,5 +322,3 @@ async function renderHabit(habit) {
 
 initialise()
 
-
-module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
