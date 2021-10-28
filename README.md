@@ -11,6 +11,3 @@ Profile Page
 Working in a team of five we created an app that will allow users to track the progress of their chosen habits. The app was designed to allow users to record any habits of their choice, set a time limit according to daily/weekly/monthly and set a target of times they need to carry out that habit within the specified time limit. The project brief included the following:
 
 
-
-
-
