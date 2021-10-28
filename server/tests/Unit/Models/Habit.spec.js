@@ -162,6 +162,7 @@ describe('Habit', () => {
 
 });
 
+
 // id SERIAL PRIMARY KEY,
 //     habit_name varchar(100) NOT NULL,
 //     frequency varchar(100) NOT NULL,

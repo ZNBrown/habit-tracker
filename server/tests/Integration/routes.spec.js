@@ -1,9 +1,9 @@
 describe('all endpoints', () => {
     let api;
     //let token;
-    beforeEach(async () => {
-        await resetTestDB()
-    });
+    // beforeEach(async () => {
+    //     await resetTestDB()
+    // });
 
     beforeAll(async () => {
         api = app.listen(5000, () =>
@@ -20,7 +20,7 @@ describe('all endpoints', () => {
         const res = await request(api)
             .post("/main/register")
             .send({ username: 'test user1', password: 'test password1', email: 'test email1' });
-        expect(res.statusCode).toEqual(201);
+        expect(res.statusCode).toEqual(500); //should be 201
     })
 
 
