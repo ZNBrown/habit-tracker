@@ -110,7 +110,7 @@ async function showTime(habit)
 
   (days || hours || minutes) && timeTemp.push(' and ' + minutes + ' minutes');
   timeTemp.join(' ');
-  return `You have ${timeTemp} left`
+  return `You have ${timeTemp} left to complete this habit`
 }
 
 async function renderHabit(habit) {
