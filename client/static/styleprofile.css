@@ -35,7 +35,7 @@ h1 {
     color: darkblue;
     font-size: 30px;
     margin-top: 7px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 header {
@@ -218,6 +218,7 @@ footer {
     font-size: 15px;
     color: rgb(133, 6, 6);
     text-align: center;
+    padding: 0 3px;
 }
 
 
@@ -245,6 +246,7 @@ footer {
         font-size: 15px;
         color: darkblue;
         margin-top:20px;
+        margin-left: 5px;
     }
 
     #profile {
@@ -293,6 +295,13 @@ footer {
         font-size: 15px;
         color: black;
         text-align: center;
+    }
+
+    #showTimeElement {
+        font-size: 15px;
+        color: rgb(133, 6, 6);
+        text-align: center;
+        padding: 0 1.5px;
     }
 
     #deleteBtn {
