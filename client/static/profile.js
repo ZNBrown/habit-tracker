@@ -146,13 +146,6 @@ async function renderHabit(habit) {
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
 
-  if(habit.frequency_track === habit.frequency_target) {
-    console.log("hi");
-    let parent = this.parentNode;
-    console.log(parent);
-    
-    parent.style.backgroundColor = 'green';
-  }
   //show time element
   const showTimeElement = document.createElement("p");
   showTimeElement.setAttribute("id", "showTimeElement");
