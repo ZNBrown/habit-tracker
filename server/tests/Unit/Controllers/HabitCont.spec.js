@@ -74,7 +74,7 @@ describe('habits controller', () => {
         })
     });
 
-    // // test for updatefreq
+    // test for updatefreq
 
     describe('updatefreq', () => {
         test('it returns an update habit completed  with a 200 status code', async () => {

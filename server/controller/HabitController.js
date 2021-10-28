@@ -17,7 +17,6 @@ async function index(req, res) {
                 }
             })
         }
-
         const habits = await Habit.getHabitByUserId(userId)
         res.status(200).json(habits)
     } catch (err) {
