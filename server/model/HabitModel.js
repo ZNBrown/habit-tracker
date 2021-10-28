@@ -1,18 +1,15 @@
 const db = require('../dbConfig/init')
 const User = require('./UserModel')
 
-
-
 class Habit {
     constructor(data) {
-
-
         this.id = data.id;
         this.habit_name = data.habit_name;
-        this.habit_info = data.habit_info;
         this.frequency = data.frequency;
         this.frequency_track = data.frequency_track;
         this.frequency_target = data.frequency_target;
+        this.deadline = data.deadline;
+        this.time_created = data.time_created;
         this.complete = data.complete;
         this.user_id = data.user_id;
     }
@@ -50,6 +47,7 @@ class Habit {
             try {
                 let selectQuery = await db.query(`SELECT * FROM Habits WHERE id = $1;`, [id])
                 let habits = new Habit(selectQuery.rows[0])
+                console.log(`findibg by id ${habits}`)
                 res(habits)
             } catch (err) {
                 rej(`failed to retrieve habit: ${err}`)
@@ -60,16 +58,44 @@ class Habit {
     static create(habitData, userEmail) {
         return new Promise(async (res, rej) => {
             try {
-                let frequency_track = 0;
-                let complete = false;
-                const { habit_name, habit_info, frequency, frequency_target } = habitData
-                let user = await User.findByEmail(userEmail)
-                const habits = await db.query('INSERT INTO Habits (habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [habit_name, habit_info, frequency, frequency_track, frequency_target, complete, user.id])
-                const newHabit = new Habit(habits.rows[0]);
-                res(newHabit)
+                    let frequency_track = 0;
+                    let complete = "false";
+                    const { habit_name, frequency, frequency_target} = habitData
+                    let now = Date.now()
+                    let deadline = await convert(frequency) + now
+                    console.log(`habit data ${habitData}`)
+                    console.log(`habit name ${habit_name}`)
+                    console.log(`user email ${userEmail}`)
+                    console.log(`frequency ${frequency}`)
+                    console.log(`target ${frequency_target}`)
+                    console.log(`track ${frequency_track}`)
+                    console.log(`deadline ${deadline}`)
+                    let user = await User.findByEmail(userEmail)
+                    const habits = await db.query('INSERT INTO Habits (habit_name, frequency, frequency_track, frequency_target, deadline, time_created,complete, user_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;', [habit_name, frequency, frequency_track, frequency_target, deadline, now, complete, user.id])
+                    const newHabit = new Habit(habits.rows[0]);
+                    res(newHabit)
             } catch (err) {
                 rej(`Failed to create Habit ${err}`)
             }
+        })
+    }
+
+    updateTime(){
+        return new Promise(async (res, rej) => {
+            try {
+                let now = Date.now()
+                if (now >= this.deadline && this.complete == "false"){
+                    let complete = "fail"
+                    let updateQuery = await db.query(`UPDATE Habits SET complete = $1 WHERE id = $2 RETURNING *;`,[complete,this.id])
+                    let updateComplete = new Habit(updateQuery.rows[0])
+                    res(updateComplete)
+                } else {
+                    res("You still have time to complete the habit")
+                }
+            } catch (err) {
+                rej(`failed to update complete, in update time: ${err}`)
+            }
+
         })
     }
 
@@ -79,7 +105,8 @@ class Habit {
                 if (this.frequency_track < this.frequency_target) {
                     let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`, [this.id])
                     let updateFreq = new Habit(updateQuery.rows[0])
-                    res(updateFreq)
+                    console.log(`update freq is ${JSON.stringify(updateFreq)}`)
+                    res(JSON.stringify(updateFreq))
                 } else {
                     let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`, [this.id])
                     let updateComp = new Habit(comUpdateQuery.rows[0])
@@ -94,9 +121,13 @@ class Habit {
     updateReduceFrequency() {
         return new Promise(async (res, rej) => {
             try {
-                let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`, [this.id])
-                let reduceFreq = new Habit(updateQuery.rows[0])
-                res(reduceFreq)
+                if (this.frequency_track > 0) {
+                    let updateQuery = await db.query(`UPDATE Habits set frequency_track = frequency_track - 1 WHERE id = $1 RETURNING *;`, [this.id])
+                    let reduceFreq = new Habit(updateQuery.rows[0])
+                    res(reduceFreq)
+                } else {
+                    res("can not go under 0")
+                }
             } catch (err) {
                 rej(`failed to update frequency: ${err}`)
             }
@@ -132,10 +163,41 @@ class Habit {
             }
         })
     }
-
-
-
-
 }
+
+
+async function convert(frequency) {
+    let date = new Date();
+    let currentTime = date.getHours()
+    let currentDay = 6 - date.getDay()
+    let currentDayInHours = currentDay * 24
+    console.log(currentDayInHours)
+    console.log(`currentTime please: ${currentTime}`)
+    if (frequency == "Daily"){
+        console.log('it is in daily')
+        let remainingTimeHours  = 24 - currentTime
+        let remainingTime = remainingTimeHours * 3600000
+        console.log(remainingTime)
+        return remainingTime
+    } else if (frequency == "Weekly"){
+        let remainingTimeHours  = 168 - currentDayInHours
+        let remainingTime = remainingTimeHours * 6048000
+        return remainingTime
+    } else if (frequency == "Monthly"){
+        let remainingTimeHours  = 24 - startTime()
+        let remainingTime = remainingTimeHours * 2629800000
+        return remainingTime
+    }else{
+        console.log('no where')
+    }
+}
+
+async function startTime() {
+    let date = new Date();
+    let current_time = date.getHours()
+    return current_time
+}
+
+
 
 module.exports = Habit
