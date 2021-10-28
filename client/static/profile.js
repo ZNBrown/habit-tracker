@@ -148,10 +148,10 @@ async function renderHabit(habit) {
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
 
   //show time element
-  const showTimeElement = document.createElement("p");
-  showTimeElement.setAttribute("id", "showTimeElement");
+  // const showTimeElement = document.createElement("p");
+  // showTimeElement.setAttribute("id", "showTimeElement");
 
-  showTimeElement.textContent = "hello";
+  // showTimeElement.textContent = "hello";
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
@@ -244,7 +244,7 @@ async function renderHabit(habit) {
   habitDiv.appendChild(hNameElement);
   habitDiv.appendChild(hFrequencyElement);
   habitDiv.appendChild(freqTargetElement)
-  habitDiv.appendChild(showTimeElement);
+  // habitDiv.appendChild(showTimeElement);
   habitDiv.appendChild(fTargetDownElement);
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
