@@ -33,7 +33,9 @@ h1 {
 
 #welcomeUser {
     color: black;
-    font-size: 15px;
+    font-size: 30px;
+    margin-top: 7px;
+    margin-left: 5px;
 }
 
 header {

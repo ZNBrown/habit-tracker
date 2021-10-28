@@ -1,11 +1,10 @@
 //Dyname Welcome <user>
-function welcomeUser(e) {
-  e.preventDefault();
-	const welcomeMessage = document.getElementById('welcomeUser');
-	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
+function welcomeUser() {
+  const username = localStorage.getItem("username");
+	const welcomeMessage = document.querySelector('#welcomeUser');
+  document.title = `${username}'s Habits`;
+	welcomeMessage.textContent = ` ${username}`; //TO BE TESTED ONCE DB IS CONNECTED
 }
-
-
 
 //add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
