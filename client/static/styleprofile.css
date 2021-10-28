@@ -214,6 +214,11 @@ footer {
     cursor: pointer;
 }
 
+#showTimeElement {
+    font-size: 15px;
+    color: black;
+}
+
 
 /*mobile responsiveness*/
 @media only screen and (max-width: 760px) {

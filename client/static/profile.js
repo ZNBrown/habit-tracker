@@ -147,6 +147,12 @@ async function renderHabit(habit) {
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
 
+  //show time element
+  const showTimeElement = document.createElement("p");
+  showTimeElement.setAttribute("id", "showTimeElement");
+
+  showTimeElement.textContent = "hello";
+
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
   fTargetDownElement.textContent = '-';
@@ -237,7 +243,8 @@ async function renderHabit(habit) {
   //insert into DOM
   habitDiv.appendChild(hNameElement);
   habitDiv.appendChild(hFrequencyElement);
-  habitDiv.appendChild(freqTargetElement);
+  habitDiv.appendChild(freqTargetElement)
+  habitDiv.appendChild(showTimeElement);
   habitDiv.appendChild(fTargetDownElement);
   habitDiv.appendChild(fTargetUpElement);
   habitDiv.appendChild(deleteBtnElement);
@@ -261,4 +268,4 @@ async function renderHabit(habit) {
 initialise()
 
 
-module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
+//module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
