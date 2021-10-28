@@ -162,10 +162,8 @@ async function convert(frequency) {
     let date = new Date();
     if (frequency == "Daily") {
         let currentTime = date.getHours()
-        console.log('it is in daily')
         let remainingTimeHours = 24 - currentTime
         let remainingTime = remainingTimeHours * 3600000
-        console.log(remainingTime)
         return remainingTime
     } else if (frequency == "Weekly") {
         let currentWeekDay = date.getDay()
