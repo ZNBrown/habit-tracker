@@ -178,7 +178,6 @@ async function renderHabit(habit) {
   if (habit.complete == "true")
   {
     habitDiv.style.backgroundColor = 'green';
-
   }
   else if  (habit.complete == "failed")
   {
