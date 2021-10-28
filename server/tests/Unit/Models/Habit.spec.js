@@ -67,27 +67,46 @@ describe('Habit', () => {
                 .mockResolvedValueOnce(new User({ id: 1, email: 'email5' }));
             const result = await Habit.create(habitData, userEmail);
             expect(result).toHaveProperty('id')
+            expect(result).toHaveProperty('deadline')
 
         })
     });
+
+    //test to updateTime
+
+    // describe('updateTime', () => {
+    //     test('it resolves with updated habit on successful db query', async () => {
+    //         let testHabit = new Habit({
+    //             habit_name: "Gym", frequency: "Daily", frequency_track: 3,
+    //             frequency_target: 3, deadline: 1, time_created: 100, complete: "false", now: 2, user_id: 1
+    //         });
+
+    //         let now = { now: 2 }
+    //         jest.spyOn(db, 'query')
+    //             .mockResolvedValueOnce({ rows: [{ ...testHabit, ...now, complete: "true", id: 1 }] });
+    //         const result = await testHabit.updateTime();
+    //         expect(result).toHaveProperty('id')
+    //         expect(result).toHaveProperty('complete')
+    //     })
+    // });
 
 
 
     // //test to updateFrequencyTrack
 
-    // describe('updateFrequencyTrack', () => {
-    //     test('it resolves with updated habit on successful db query', async () => {
-    //         let testHabit = new Habit({
-    //             habit_name: "Gym", frequency: "Daily", frequency_track: 3,
-    //             frequency_target: 3, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
-    //         });
-    //         jest.spyOn(db, 'query')
-    //             .mockResolvedValueOnce({ rows: [{ ...testHabit, frequency_track: 2, id: 1 }] });
-    //         const result = await testHabit.updateFrequencyTrack();
-    //         expect(result).toHaveProperty('id')
-    //         expect(result).toHaveProperty('frequency_track')
-    //     })
-    // });
+    describe('updateFrequencyTrack', () => {
+        test('it resolves with updated habit on successful db query', async () => {
+            let testHabit = new Habit({
+                habit_name: "Gym", frequency: "Daily", frequency_track: 3,
+                frequency_target: 3, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
+            });
+            jest.spyOn(db, 'query')
+                .mockResolvedValueOnce({ rows: [{ ...testHabit, frequency_track: 2, id: 1 }] });
+            const result = await testHabit.updateFrequencyTrack();
+            expect(result).toHaveProperty('id')
+            expect(result).toHaveProperty('frequency_track')
+        })
+    });
 
     // // // test to updateReduceFrequency
 
