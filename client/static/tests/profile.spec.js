@@ -1,8 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const html = fs.readFileSync(path.resolve(__dirname, '../profile.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, '../../profile.html'), 'utf8');
 let myFuns;
-global.fetch = require('jest-fetch-mock');
 
 describe('upper body test', () => {
     beforeAll(() => {
@@ -11,13 +10,13 @@ describe('upper body test', () => {
     });
 
     test('header title has "Welcome"', () => {
-        const welcomeMessage = myFuns.welcomeUser(e);
-        expect(welcomeMessage).toContain('Welcome');
+        const welcomeMessage = document.querySelector("#welcomeUser");
+        expect(welcomeMessage.textContent).toContain('Welcome,');
     })
 
     test('add new habit displays habit-modal', () => {
-        const habitModal = myFuns.showAddHabitForm(e);
-        expect(habitModal).classList.not.toContain('hidden');
+        const habitModal = myFuns.showAddHabitForm();
+        expect(habitModal).not.toContain();
     });
 
     test('close button in habit modal form closes', () => {
@@ -31,8 +30,8 @@ describe('upper body test', () => {
     // }) 
 });
 
-describe('body rendering', () => {
-    beforeAll(()=> {
-        document.documentElement.innerHTML = ``
-    })
-})
+// describe('body rendering', () => {
+//     beforeAll(()=> {
+//         document.documentElement.innerHTML = ``
+//     })
+// })
