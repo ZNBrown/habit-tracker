@@ -24,6 +24,44 @@ async function index(req, res) {
     }
 }
 
+async function createStreak (req, res) {
+    console.log('ourside the try')
+    try {
+        const header = req.headers['authorization'];
+        console.log('above header')
+        if (header) {
+            console.log('inside header')
+            let userId;
+            const token = header.split(' ')[1]
+            jwt.verify(token, process.env.SECRET, async (err, data) => {
+                if (err) {
+                    console.log(err.message);
+                    next();
+                } else {
+                    userId = data.id
+                    console.log(userId)
+                }
+            })
+            console.log(userId)
+            const habits = await Habit.getHabitByUserId(userId)
+            let completeArr = []
+        for(let i = 0; i < habits.length; i++){
+            if (habits[i].complete == "true"){
+                let completed = habits[i].complete
+                completeArr.push(completed)
+            } else {
+                console.log('habit not completed')
+            }
+        }
+        console.log(completeArr)
+        res.status(200).json(completeArr)
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({err})
+    }
+}
+
 async function show(req, res){
     try {
         let habitId = req.params.id
@@ -108,5 +146,5 @@ async function destroy(req, res) {
 }
 
 
-module.exports = { index, show, create, destroy, updatefreq, updateComp, reduceFreq}
+module.exports = { index, show, create, destroy, updatefreq, updateComp, reduceFreq, createStreak}
 

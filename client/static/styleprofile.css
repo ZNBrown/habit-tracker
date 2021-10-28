@@ -32,7 +32,7 @@ h1 {
 }
 
 #welcomeUser {
-    color: black;
+    color: darkblue;
     font-size: 30px;
     margin-top: 7px;
     margin-left: 5px;
@@ -214,6 +214,12 @@ footer {
     cursor: pointer;
 }
 
+#showTimeElement {
+    font-size: 15px;
+    color: rgb(133, 6, 6);
+    text-align: center;
+}
+
 
 /*mobile responsiveness*/
 @media only screen and (max-width: 760px) {
@@ -237,7 +243,8 @@ footer {
 
     #welcomeUser {
         font-size: 15px;
-        color: black;
+        color: darkblue;
+        margin-top:20px;
     }
 
     #profile {
@@ -289,7 +296,7 @@ footer {
     }
 
     #deleteBtn {
-        width: 30px;
+        width: 50px;
         border-radius: 5px;
         border-style: none;
         cursor: pointer;
@@ -298,7 +305,7 @@ footer {
         font-size: 10px;
         font-family: 'Poppins', sans-serif;
         float: right;
-        margin-right: 25px;
+        margin-right: 15px;
         height: 12%;
         margin-top: 3px;
     }
