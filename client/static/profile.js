@@ -117,10 +117,17 @@ async function renderHabit(habit) {
   const freqTargetElement = document.createElement("p");
   freqTargetElement.setAttribute("id", "freqTargetElement");
 
-  // let defaultTrack = 0
-
+  
   const freqTarget = document.querySelector('#freqTarget').value;
   freqTargetElement.textContent = `${habit.frequency_track} / ${habit.frequency_target}`;
+
+  if(habit.frequency_track === habit.frequency_target) {
+    console.log("hi");
+    let parent = this.parentNode;
+    console.log(parent);
+    
+    parent.style.backgroundColor = 'green';
+  }
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
@@ -176,6 +183,14 @@ async function renderHabit(habit) {
     })
     console.log(updateHabit);
     freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
+    
+    if(updateHabit.data.frequency_track === updateHabit.data.frequency_target) {
+      console.log("hi");
+      let parent = this.parentNode;
+      console.log(parent);
+      
+      parent.style.backgroundColor = 'green';
+    }
     }
     catch (err)
     {
