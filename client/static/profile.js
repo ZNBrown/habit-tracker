@@ -1,11 +1,10 @@
 //Dyname Welcome <user>
-function welcomeUser(e) {
-  e.preventDefault();
-	const welcomeMessage = document.getElementById('welcomeUser');
-	welcomeMessage.textContent = `Welcome, ${localStorage.getItem('username')}`; //TO BE TESTED ONCE DB IS CONNECTED
+function welcomeUser() {
+  const username = localStorage.getItem("username");
+	const welcomeMessage = document.querySelector('#welcomeUser');
+  document.title = `${username}'s TrackIt`;
+	welcomeMessage.textContent = `Welcome, ${username}`; 
 }
-
-
 
 //add habit button opens pop-up form
 const addHabit = document.getElementById('addhabit');
@@ -13,7 +12,7 @@ const addHabit = document.getElementById('addhabit');
 addHabit.addEventListener('click', showAddHabitForm);
 
 function showAddHabitForm(e) {
-  e.preventDefault();
+  //e.preventDefault();
   const habitModal = document.querySelector('.habit-modal');
 	habitModal.classList.remove('hidden');
 }
@@ -35,6 +34,7 @@ const logOutBtn = document.getElementById('logout');
 
 logOutBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    welcomeUser();
     localStorage.clear();
     window.location.pathname = '/';
     //window.location.assign("<deploy homepage URL>") //MAIN CODE WHEN DB CONNECTS
@@ -86,11 +86,36 @@ async function renderAllHabits()
 
 async function initialise(){
   renderAllHabits();
+  welcomeUser();
+}
+async function showTime(habit)
+{
+  const dateObject = new Date(habit.deadline * 1)
+  let nowTime = new Date()
+  let betweenTime = dateObject - nowTime;
+
+
+  const days = Math.floor(betweenTime / (1000 * 60 * 60 * 24)); 
+  betweenTime -= days * 1000 * 60 * 60 * 24
+  const hours = Math.floor(betweenTime / (1000 * 60 * 60)); 
+  betweenTime -= hours * 1000 * 60 * 60
+  const minutes = Math.floor(betweenTime / (1000 * 60)); 
+  betweenTime -= minutes * 1000 * 60
+
+  const timeTemp = [];
+
+  (days) && timeTemp.push(days + ' days');
+
+  (days || hours) && timeTemp.push(' ' + hours + ' hours');
+
+  (days || hours || minutes) && timeTemp.push(' and ' + minutes + ' minutes');
+  timeTemp.join(' ');
+  return `You have ${timeTemp} left`
 }
 
 async function renderHabit(habit) {
-
-  console.log(`deadline for the habit ${habit.deadline}`)
+  const timeToDisplay = showTime(habit)
+  console.log(timeToDisplay)
 
   const habitsContainer = document.getElementById('habitsContainer');
   
@@ -234,3 +259,6 @@ async function renderHabit(habit) {
 
 
 initialise()
+
+
+module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
