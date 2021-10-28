@@ -151,7 +151,7 @@ async function renderHabit(habit) {
   const showTimeElement = document.createElement("p");
   showTimeElement.setAttribute("id", "showTimeElement");
 
-  showTimeElement.textContent = "hello";
+  showTimeElement.textContent = await showTime(habit);
 
   //add freqTargetDecrement
   const fTargetDownElement = document.createElement('button');
