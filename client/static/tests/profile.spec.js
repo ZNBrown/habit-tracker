@@ -89,5 +89,5 @@ describe('body render', () => {
         myFuns = require('../profile');
     });
 
-    test()
+    
 })
