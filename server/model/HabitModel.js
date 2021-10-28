@@ -161,24 +161,24 @@ class Habit {
 
 async function convert(frequency) {
     let date = new Date();
-    let currentTime = date.getHours()
-    let currentDay = 6 - date.getDay()
-    let currentDayInHours = currentDay * 24
-    // console.log(currentDayInHours)
-    // console.log(`currentTime please: ${currentTime}`)
     if (frequency == "Daily") {
-        //console.log('it is in daily')
+        let currentTime = date.getHours()
+        console.log('it is in daily')
         let remainingTimeHours = 24 - currentTime
         let remainingTime = remainingTimeHours * 3600000
         // console.log(remainingTime)
         return remainingTime
     } else if (frequency == "Weekly") {
+        let currentWeekDay = date.getDay()
+        let currentDayInHours = currentWeekDay * 24
         let remainingTimeHours = 168 - currentDayInHours
-        let remainingTime = remainingTimeHours * 6048000
+        let remainingTime = remainingTimeHours * 3600000
         return remainingTime
     } else if (frequency == "Monthly") {
-        let remainingTimeHours = 24 - startTime()
-        let remainingTime = remainingTimeHours * 2629800000
+        let currentMonthDay = date.getDate()
+        let currentDayInHour = currentMonthDay * 24
+        let remainingTimeHours = 730 - currentDayInHour
+        let remainingTime = remainingTimeHours * 3600000
         return remainingTime
     } else {
         console.log('no where')
