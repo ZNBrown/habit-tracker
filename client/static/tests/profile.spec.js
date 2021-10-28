@@ -12,26 +12,19 @@ describe('upper body test', () => {
     test('header title has "Welcome"', () => {
         const welcomeMessage = document.querySelector("#welcomeUser");
         expect(welcomeMessage.textContent).toContain('Welcome,');
-    })
+        expect(welcomeMessage.textContent).not.toEqual('Document');
+    });
+
 
     test('add new habit displays habit-modal', () => {
         const habitModal = myFuns.showAddHabitForm();
-        expect(habitModal).not.toContain();
+        expect(habitModal.classList).not.toEqual("hidden");
     });
 
     test('close button in habit modal form closes', () => {
         const closeHabit = myFuns.closeHabitForm();
-        expect(closeHabit).classList.toContain('hidden');
+        expect(closeHabit.classList).toEqual('hidden');
     });
 
-    // test('log out redirects to index, () => {
-    //     const logOut = myFuns.logOutBtn();
-    //     expect(logOut).
-    // }) 
+    
 });
-
-// describe('body rendering', () => {
-//     beforeAll(()=> {
-//         document.documentElement.innerHTML = ``
-//     })
-// })

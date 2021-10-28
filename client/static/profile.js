@@ -268,4 +268,4 @@ async function renderHabit(habit) {
 initialise()
 
 
-//module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
+module.exports = { welcomeUser, showAddHabitForm, closeHabitForm, renderHabitPrep, renderAllHabits, initialise, renderHabit }
