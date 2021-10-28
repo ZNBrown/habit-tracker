@@ -97,11 +97,11 @@ describe('Habit', () => {
     describe('updateFrequencyTrack', () => {
         test('it resolves with updated habit on successful db query', async () => {
             let testHabit = new Habit({
-                habit_name: "Gym", frequency: "Daily", frequency_track: 3,
-                frequency_target: 3, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
+                habit_name: "Gym", frequency: "Daily", frequency_track: 4,
+                frequency_target: 6, deadline: 10000, complete: "false", time_created: 100, user_id: 1
             });
             jest.spyOn(db, 'query')
-                .mockResolvedValueOnce({ rows: [{ ...testHabit, frequency_track: 2, id: 1 }] });
+                .mockResolvedValueOnce({ rows: [{ ...testHabit, frequency_track: 7, id: 1 }] });
             const result = await testHabit.updateFrequencyTrack();
             expect(result).toHaveProperty('id')
             expect(result).toHaveProperty('frequency_track')

@@ -99,8 +99,7 @@ class Habit {
                 if (this.frequency_track < this.frequency_target) {
                     let updateQuery = await db.query(`UPDATE Habits SET frequency_track = frequency_track + 1 WHERE id = $1 RETURNING *;`, [this.id])
                     let updateFreq = new Habit(updateQuery.rows[0])
-                    console.log(`update freq is ${JSON.stringify(updateFreq)}`)
-                    res(JSON.stringify(updateFreq))
+                    res(updateFreq)
                 } else {
                     let comUpdateQuery = await db.query(`UPDATE Habits SET complete = true WHERE id = $1 RETURNING *;`, [this.id])
                     let updateComp = new Habit(comUpdateQuery.rows[0])
