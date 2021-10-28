@@ -32,8 +32,10 @@ h1 {
 }
 
 #welcomeUser {
-    color: black;
-    font-size: 15px;
+    color: darkblue;
+    font-size: 30px;
+    margin-top: 7px;
+    margin-left: 10px;
 }
 
 header {
@@ -212,7 +214,148 @@ footer {
     cursor: pointer;
 }
 
+#showTimeElement {
+    font-size: 15px;
+    color: rgb(133, 6, 6);
+    text-align: center;
+    padding: 0 3px;
+}
 
+
+/*mobile responsiveness*/
+@media only screen and (max-width: 760px) {
+    
+    #logo {
+        width: 30px;
+        height: 30px;
+        margin-top: 26px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    #logout {
+        font-size: 12px;
+        width: 60px;
+        margin-right: 10px;
+        height: 28px;
+    }
+
+    #welcomeUser {
+        font-size: 15px;
+        color: darkblue;
+        margin-top:20px;
+        margin-left: 5px;
+    }
+
+    #profile {
+        width: 360px;
+    }
+
+    #addhabit {
+        font-size: 10px;
+        margin-top: 15px;
+        height: 30px;
+
+    }
+
+    #habitsContainer {
+        margin: 5px;
+        display: grid;
+        justify-content: center;
+    } 
+
+    #habitDiv {
+        margin: 20px;
+        display: block;
+        background-color: white;
+        width: 320px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 1px 1px 4px white;
+    }
+
+    #hNameElement {
+        font-size: 20px;
+        color: darkblue;
+        text-align: center;
+    }
+    
+    #hFrequencyElement {
+        font-size: 15px;
+        color: darkblue;
+        text-align: center;
+        margin-top: -20px;
+    
+    
+    }
+    
+    #freqTargetElement {
+        font-size: 15px;
+        color: black;
+        text-align: center;
+    }
+
+    #showTimeElement {
+        font-size: 15px;
+        color: rgb(133, 6, 6);
+        text-align: center;
+        padding: 0 1.5px;
+    }
+
+    #deleteBtn {
+        width: 50px;
+        border-radius: 5px;
+        border-style: none;
+        cursor: pointer;
+        background: -webkit-linear-gradient(right,#051e36,#350933,#0a1c2c, #270627);
+        color: white;
+        font-size: 10px;
+        font-family: 'Poppins', sans-serif;
+        float: right;
+        margin-right: 15px;
+        height: 12%;
+        margin-top: 3px;
+    }
+    
+    #fTargetUpElement {
+        width: 10%;
+        border: 1px solid darkblue;
+        color: white;
+        font-size: 12px;
+        text-align: center;
+        background-color: rgb(23, 34, 5);
+        box-shadow: 1px 1px 4px rgb(184, 184, 184);
+        margin-left: 4%;
+        margin-bottom: 15px;
+        height: 10%;
+        cursor: pointer;
+    }
+    
+    #fTargetDownElement {
+        width: 10%;
+        border: 1px solid darkblue;
+        color: white;
+        font-size: 12px;
+        margin-left: 36%;
+        background-color: rgb(46, 1, 1);
+        box-shadow: 1px 1px 4px rgb(184, 184, 184);
+        margin-bottom: 15px;
+        height: 10%;
+        cursor: pointer;
+    }
+
+
+
+
+    
+    footer {
+        font-size: 12px;
+        text-align: center;
+        margin:auto;
+    }
+}
 
 
 
