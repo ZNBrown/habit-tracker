@@ -90,6 +90,8 @@ async function initialise(){
 
 async function renderHabit(habit) {
 
+  console.log(`deadline for the habit ${habit.deadline}`)
+
   const habitsContainer = document.getElementById('habitsContainer');
   
   //create div for each habit
@@ -109,6 +111,7 @@ async function renderHabit(habit) {
 
   const hFrequency = document.querySelector('#hFrequency').value;
   hFrequencyElement.textContent = habit.frequency;
+
 
   //add frequency target
   const freqTargetElement = document.createElement("p");
