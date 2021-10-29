@@ -89,7 +89,13 @@ Henry Opara / DesignedByQ - Front End Developer
 
 ### Code snippets
 
+![image](https://user-images.githubusercontent.com/32695213/139392978-b3dbe21d-08f3-4e10-b043-f20f72364ded.png)
 
+![image](https://user-images.githubusercontent.com/32695213/139393088-d08b60bc-d0d3-4452-883a-dc26c0f452f5.png)
+
+![image](https://user-images.githubusercontent.com/32695213/139393206-8db1e65d-7f61-49f9-b8e9-ced4fb7eff7c.png)
+
+![image](https://user-images.githubusercontent.com/32695213/139393360-44d607e0-3dc4-405f-bf84-a3f3c157ddf2.png)
 
 ### Future features
 
