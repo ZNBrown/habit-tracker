@@ -29,7 +29,7 @@ loginForm.addEventListener('submit', async (e) => {
     password:  e.target[1].value,
   }
   try{
-    const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
+    const newUser = await axios.post(`https://trackit-lap2.herokuapp.com/main/login`, postData);
     userData = JSON.parse(atob(newUser.data.token.split(' ')[1].split('.')[1]))
     localStorage.setItem('token', newUser.data.token);
     localStorage.setItem('username', userData.username)
@@ -54,13 +54,13 @@ async function signupHelper(e) {
   }
   console.log(postData)
   try{
-    const newUser = await axios.post(`http://localhost:3000/main/register`, postData);
+    const newUser = await axios.post(`https://trackit-lap2.herokuapp.com/main/register`, postData);
     try{
       const loginData = {
         email: postData.email,
         password: postData.password
       }
-      const newUser = await axios.post(`http://localhost:3000/main/login`, postData);
+      const newUser = await axios.post(`https://trackit-lap2.herokuapp.com/main/login`, postData);
       userData = JSON.parse(atob(newUser.data.token.split(' ')[1].split('.')[1]))
       localStorage.setItem('token', newUser.data.token);
       localStorage.setItem('username', userData.username)

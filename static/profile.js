@@ -5,7 +5,7 @@ async function welcomeUser() {
   let postData;
 	const welcomeMessage = document.querySelector('#welcomeUser');  
   try {
-  let response = await axios.post(`http://localhost:3000/main/streak`, postData, {
+  let response = await axios.post(`https://trackit-lap2.herokuapp.com/main/streak`, postData, {
     headers: {
       'authorization': localStorage.getItem('token')
     }})
@@ -78,7 +78,7 @@ async function renderHabitPrep()
   console.log(`post data ${postData}`)
   console.log(`token is in profile ${localStorage.getItem('token')}`)
   try {
-  let response = await axios.post(`http://localhost:3000/main/habits`, postData, {
+  let response = await axios.post(`https://trackit-lap2.herokuapp.com/main/habits`, postData, {
     headers: {
       'authorization': localStorage.getItem('token')
     }})
@@ -95,7 +95,7 @@ async function renderHabitPrep()
 
 async function renderAllHabits()
 {
-  let habits = await axios.get(`http://localhost:3000/main/habit/allhabits`,  
+  let habits = await axios.get(`https://trackit-lap2.herokuapp.com/main/habit/allhabits`,  
   {
     headers: {
     'authorization': localStorage.getItem('token')
@@ -202,14 +202,14 @@ async function renderHabit(habit) {
       return "Already completed"
     }
     try {
-    let updateButton = await fetch(`http://localhost:3000/main/habit/rfrequency/${habit.id}`,
+    let updateButton = await fetch(`https://trackit-lap2.herokuapp.com/main/habit/rfrequency/${habit.id}`,
     {
       method: 'PATCH',
       headers: {
         'authorization': localStorage.getItem('token')
       }
     })
-    const updateHabit = await axios.get(`http://localhost:3000/main/habit/${habit.id}`,
+    const updateHabit = await axios.get(`https://trackit-lap2.herokuapp.com/main/habit/${habit.id}`,
     {
       headers: {
         'authorization': localStorage.getItem('token')
@@ -233,14 +233,14 @@ async function renderHabit(habit) {
 
   async function incrementButton() {
     try {
-    let updateButton = await fetch(`http://localhost:3000/main/habit/frequency/${habit.id}`,
+    let updateButton = await fetch(`https://trackit-lap2.herokuapp.com/main/habit/frequency/${habit.id}`,
     {
       method: 'PATCH',
       headers: {
         'authorization': localStorage.getItem('token')
       }
     })
-    const updateHabit = await axios.get(`http://localhost:3000/main/habit/${habit.id}`,
+    const updateHabit = await axios.get(`https://trackit-lap2.herokuapp.com/main/habit/${habit.id}`,
     {
       headers: {
         'authorization': localStorage.getItem('token')
@@ -250,7 +250,7 @@ async function renderHabit(habit) {
     freqTargetElement.textContent = `${updateHabit.data.frequency_track} / ${habit.frequency_target}`;
     
     if(updateHabit.data.frequency_track === updateHabit.data.frequency_target) {
-      let updateButton = await fetch(`http://localhost:3000/main/habit/frequency/${habit.id}`,
+      let updateButton = await fetch(`https://trackit-lap2.herokuapp.com/main/habit/frequency/${habit.id}`,
       {
         method: 'PATCH',
         headers: {
@@ -283,7 +283,7 @@ async function renderHabit(habit) {
         }
       //need the jwt to let the server know we are logged in
       }
-      await fetch(`http://localhost:3000/main/habit/${habit.id}`, options);
+      await fetch(`https://trackit-lap2.herokuapp.com/main/habit/${habit.id}`, options);
       
     } catch (err) {
       console.log(err)

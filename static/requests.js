@@ -32,7 +32,7 @@ async function deleteHabit(id){
 		  }
 		//need the jwt to let the server know we are logged in
 	}
-        await fetch(`http://localhost:3000/habit/${id}`, options);
+        await fetch(`https://trackit-lap2.herokuapp.com/habit/${id}`, options);
 		
         window.location.hash = `#habit`
     } catch (err) {
