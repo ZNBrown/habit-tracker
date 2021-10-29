@@ -35,6 +35,7 @@ describe('habits controller', () => {
         })
     });
     //// test for create
+
     describe('create', () => {
         test('it creates a new habit with a 200 status code', async () => {
             let habitData = {
@@ -49,7 +50,11 @@ describe('habits controller', () => {
             expect(mockJson).toHaveBeenCalledWith(new Habit(habitData));
         })
     });
-    // ss
+
+
+
+    // test for updateComp
+  
     describe('updateComp', () => {
         test('it returns an update habit completed  with a 200 status code', async () => {
             let habitData = {
@@ -58,26 +63,33 @@ describe('habits controller', () => {
             };
             jest.spyOn(Habit, 'findById')
                 .mockResolvedValue(new Habit(habitData));
+
             const mockReq = {  id: 1 }
             await HabitController.updateComp(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(404);
         })
     });
+  
     // test for updatefreq
+
     describe('updatefreq', () => {
         test('it returns an update habit completed  with a 200 status code', async () => {
             let habitData = {
                 habit_name: "Gym", frequency: "Daily", frequency_track: 3,
                 frequency_target: 6, deadline: 10000, time_created: 100, complete: "fail", user_id: 1
             };
+
             jest.spyOn(Habit, 'findById')
                 .mockResolvedValue(new Habit(habitData));
             let mockReq = {id:1}
+
             await HabitController.updatefreq(mockReq, mockRes)
             expect(mockStatus).toHaveBeenCalledWith(404);
         })
     });
+
     // // test for reduceFreq
+
     describe('reduceFreq', () => {
         test('it returns an update habit completed with a 200 status code', async () => {
             let habitData = {
@@ -87,11 +99,14 @@ describe('habits controller', () => {
             jest.spyOn(Habit, 'findById')
                 .mockResolvedValue(new Habit(habitData));
             const mockReq = { id: 1  }
+
             await HabitController.reduceFreq(mockReq, mockRes);
             expect(mockStatus).toHaveBeenCalledWith(404);
         })
     });
+
     
+
     //test for delete
     describe('destroy', () => {
         test('it returns a 201 status code on successful deletion', async () => {
@@ -102,6 +117,8 @@ describe('habits controller', () => {
             expect(mockStatus).toHaveBeenCalledWith(201);
         })
     });
+
+
 });
 
 

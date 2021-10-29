@@ -15,6 +15,9 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/code/middleware/token.js"
     ]
   },
   "author": "",
