@@ -1,9 +1,32 @@
 //Dyname Welcome <user>
-function welcomeUser() {
+async function welcomeUser() {
   const username = localStorage.getItem("username");
-	const welcomeMessage = document.querySelector('#welcomeUser');
+  let streak;
+  let postData;
+	const welcomeMessage = document.querySelector('#welcomeUser');  
+  try {
+  let response = await axios.post(`http://localhost:3000/main/streak`, postData, {
+    headers: {
+      'authorization': localStorage.getItem('token')
+    }})
+    console.log("length is")
+    console.log(response.data.length)
+    if (response.data.length >= 2){
+      streak = response.data.length;
+    }
+  }
+  catch (err)
+  {
+    console.log(`error in habitprep ${err}`)
+
+  }
   document.title = `${username}'s TrackIt`;
+  if (streak){
+    welcomeMessage.textContent = `Welcome, ${username}. Streak: ${streak}`; 
+  }
+  else {
 	welcomeMessage.textContent = `Welcome, ${username}`; 
+  }
 }
 
 //add habit button opens pop-up form
@@ -236,6 +259,7 @@ async function renderHabit(habit) {
       })
       let parent = this.parentNode;      
       parent.style.backgroundColor = 'green';
+      welcomeUser();
     }
     }
     catch (err)
